@@ -1,0 +1,193 @@
+/* style background et style bloc - btn  */
+
+
+.backgroundImageLight {
+  background-image: $background-image-light;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.backgroundImageDark {
+  background-image: $background-image-dark;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+  /*aboutme blocbackground */
+
+
+
+  .main-bloc-light{
+    background: var(--bg-light-2);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    border: 10px solid var(--StartLightGradient);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+    
+  }
+  
+  .main-bloc-dark {
+    background: var(--bg-dark-2);
+    border: 10px solid var(--borderDark);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+  }
+
+/* nav-bar background et css */
+
+.navBarStyle {
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  min-height: 85px;
+
+}
+
+.nav-Light {
+  /*background: rgba(69, 144, 255, 0.833);*/
+  background: var(--bglight2) ;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+
+  
+  transition: background-color 0.5s ease-in-out;
+
+}
+
+.nav-dark {
+  background: rgb(34, 34, 91) 92%;
+  background: rgba(0,36,41,255);
+  box-shadow: 0 8px 32px 0 rgba(87, 87, 87, 0.37);
+    /*border: 1px solid var(--borderDark);*/
+  transition: background-color 0.5s ease-in-out;
+}
+
+/*#navBar .navItem button    {
+  text-align: center!important;
+  font-family: 'Montserrat', sans-serif!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  line-height: normal!important;
+  text-decoration: none; 
+}*/
+
+
+
+
+/* btn css */
+
+.btn-dark-mode {
+  background-image: linear-gradient(0deg, var(--StartDarkGradient) 0%, var(--EndDarkGradient) 75%);
+  color: var(--white);
+  border: 1px solid var(--borderDark);
+  transition: .5s ease;
+  border-radius: 8px;
+  padding: 10px 20px;
+} 
+
+.btn-light-mode {
+  background-image: linear-gradient(0deg, var(--StartLightGradient) 0%, var(--EndLightGradient) 75%);
+  color: var(--white);
+  
+  border: 1px solid var(--StartLightGradient);
+  transition: .5s ease;
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.btn-dark-mode:hover {
+  background-color: #4827FE55;
+  box-shadow: 0 0 5px #4827FE55,
+  0 0 10px #4827FE55,
+  0 0 15px #4827FE55,
+  0 0 20px #4827FE55;
+    
+} 
+.btn-dark-mode:focus {
+  background-color: #4827FE55;
+  border: 1px solid #ffffff;
+  text-shadow: 0 0 5px #4741FF,
+               0 0 10px #4741FF,
+               0 0 15px #4741FF,
+               0 0 20px #4741FF;
+  box-shadow: 0 0 5px #4827FE55,
+              0 0 10px #4827FE55,
+              0 0 15px #4827FE55,
+              0 0 20px #4827FE55;
+  
+} 
+
+.btn-light-mode:hover {
+  color: var(--white);
+  box-shadow: 0 0 5px var(--StartLightGradient),
+  0 0 10px var(--StartLightGradient),
+  0 0 15px var(--StartLightGradient);
+  
+} 
+
+.btn-light-mode:focus {
+  background-color: #1093c3;
+  color: var(--white)!important;
+  border: 1px solid #1a1a1a;
+  text-shadow: 0 0 5px #c5d9fa,
+               0 0 10px #c5d9fa,
+               0 0 15px #c5d9fa,
+               0 0 20px #c5d9fa;
+  box-shadow: 0 0 5px #e7edff ,
+              0 0 10px #e7edff ,
+              0 0 15px #e7edff ,
+              0 0 20px #e7edff ;
+  
+} 
+
+/* card css */
+
+.card {
+  flex: 0 0 50%;
+  max-width: 100%;
+}
+
+.card-carousel {
+  visibility: hidden;
+  transition: transform 0.5s ease-in-out, visibility 0.5s, opacity 0.5s;
+
+}
+
+.card-light {
+  background-color: var(--bglight2);
+  border: var(--borderLightGardient) 1px solid;
+  color: var(--black);
+}
+
+.card-dark {
+  background-color: rgba(0,36,41);
+}
+
+.card-carousel.active {
+visibility: visible;
+opacity: 1;
+}
+
+
+
+/* privacy Background*/
+
+.privacyPolicyBackgroundLight {
+  background-image: none !important;
+  background-color: azure;
+  transition: background-color 0.5s ease-in-out;
+
+}
+
+.privacyPolicyBackgroundDark {
+  background-image: none;
+  background-color: rgb(32, 32, 32);
+  background: linear-gradient( rgb(13, 21, 49) 5%, rgba(32, 32, 32) 90%);
+  transition: background-color 0.5s ease-in-out;
+
+}

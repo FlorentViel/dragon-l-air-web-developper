@@ -1,0 +1,106 @@
+
+
+
+
+$white: #ffffff;
+$black: #000000;
+$blue: #212BB2;
+
+
+/* Theme light */
+
+$bluelight: rgb(74,204,236);
+$StartLightGradient: rgb(116, 108, 247);
+$EndLightGradient: rgb(74,204,234);
+$textSecondaryLight: #000;
+$linkLight: #006F8A;
+$borderLightGardient: linear-gradient(0deg, rgb(74,204,234) 0%, rgb(116, 108, 247) 75%);
+$hoverLight: #8F04FF1A;
+$font-family: 'Montserrat', sans-serif;
+$background-image-light: url('C:/Users/florv/dossier_pro/entreprise/site/dragon-l-air-web-developper/src/assets/images/pictures/dev_web_pc_light.jpg');
+$background-image-dark: url('C:/Users/florv/dossier_pro/entreprise/site/dragon-l-air-web-developper/src/assets/images/pictures/dev_web_pc_dark.jpg');
+
+/* background */    
+
+$bg-light-1: #E7F9FF;
+$bg-light-2: #FAFAFF;
+$bglight-3: #DFF9FF;
+
+/* Theme dark */
+
+$linkdark: #9BAAFF;
+$linkdarkhover: #E5EDFF;
+$StartDarkGradient: rgb(51,66,255);
+$EndDarkGradient: rgb(115 0 255);
+
+$borderDark: #393FFEB0;
+
+
+$textPrimaryDark: rgb(51,66,255);
+$textSecondaryDark: #E5EDFF;
+$shadow: rgba( 31, 38, 135, 0.37);
+
+/* background */
+
+$bg-dark-1 : rgba(0,36,41,1);
+$bg-dark-2: rgb(26, 39, 39);
+
+
+
+
+  /* text */
+
+  @mixin font-weight-700 {
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  @mixin li-list-none {
+    list-style-type: none;
+  }
+
+  /* responsive images */
+
+
+  
+  
+  /* flexbox */
+
+  
+  @mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @mixin flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @mixin flex-0-50 {
+    flex: 0 0 50%;
+  }
+
+  @mixin flex-1-50 {
+    flex: 1 1 50%;
+  }
+
+  @mixin flex-1-100 {
+    flex: 1 1 100%;
+  }
+
+  /* margin */
+  
+  @mixin margin-x-1 {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  /* padding */

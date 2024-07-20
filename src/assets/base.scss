@@ -1,0 +1,66 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+
+
+:root {
+
+  font-family: $font-family;
+  $background-image-light: url('/front-end/src/assets/images/pictures/dev_web_pc_light.jpg');
+  $background-image-dark: url('/front-end/src/assets/images/pictures/dev_web_pc_dark.jpg');
+
+
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+
+/* app */
+
+#app{
+  box-sizing: border-box;
+  overflow-x: hidden;
+  perspective: 1000px;
+
+}
+
+
+/* background css */
+
+.backgroundDefault {
+  background-size: auto;
+  background-size: auto;
+  min-width: 100vw;
+  min-height: 100vh;
+  
+}
+
+
+.backgroundLight {
+
+  background: var(--white);
+  transition: .5s ease;
+
+}
+
+
+  .backgroundDark {
+    background: var(--bg-dark);
+    transition: .5s ease;
+} 
+
+
+/*section*/
+
+.section {
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+}

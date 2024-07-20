@@ -1,0 +1,245 @@
+/* global text css */
+
+.text-justify {
+  text-align: justify!important;
+}
+
+:is( .navItem button , p , label, h1, #navBar, span, a, body ){
+  font-family: 'Montserrat', sans-serif!important;
+}
+
+/* color white */
+
+:is(.h1-light){
+  color: var(--StartLightGradient);
+  -webkit-text-stroke: 0px !important; 
+
+}
+
+:is(.h2-light, h2){
+  color: var(--EndLightGradient);
+  
+}
+
+
+:is(.h1-dark){
+  color: var(--textPrimaryDark);
+}
+
+:is(.h2-dark){
+  color: var(--EndDarkGradient);
+}
+
+:is(.text-color-dark){
+  color: var(--textSecondaryDark);
+}
+
+:is(.text-color-light){
+  color: var(--textSecondaryLight);
+}
+
+:is(.footerTextDark, .link-section-dark){
+  color: var(--StartDarkGradient);
+}
+
+:is(.footerTextDark:hover){
+  color: var(--linkdarkhover);
+  text-decoration: underline 1px ;
+  text-decoration-color: var(--linkdarkhover);
+
+
+}
+
+:is(.footerTextDark:hover){
+  background: #4827FE55;
+  border-radius: 5%;
+  transition: all 0.5s;
+}
+
+:is(.footerTextLight:hover){
+  background:var(--hoverLight);
+  border-radius: 5%;
+  transition: all 0.5s;
+}
+
+:is(.footerTextLight, .link-section-light){
+  color: var(--StartLightGradient);
+}
+
+:is( .footerTextLight:hover, .link-section-light:hover .link-section-light:focus){
+  color: var(--EndLightGradient);
+  text-decoration: underline;
+  text-decoration-color: var(--EndLightGradient);
+}
+
+
+
+/* h1, h2 */
+  
+  h1, h2{
+    transition: .5s ease;
+    font-weight: bold!important;  
+  }
+
+
+  
+
+
+  
+  .text-style {
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: normal!important;
+  }
+  
+  .text-color-dark{
+    font-weight: 400!important;
+    transition: .5s ease;
+  
+  }
+
+    
+  .text-color-light{
+    font-weight: 400!important;
+    transition: .5s ease;
+  
+  }
+  
+  .text-wrap {
+    word-wrap: break-word; /* Permet au texte de passer à la ligne lorsqu'il dépasse la largeur de son conteneur */
+    white-space: normal; /* Permet le retour automatique à la ligne du texte */
+  }
+  
+  
+ 
+  /* p style */
+  
+  p, label {
+    font-size: 1rem; /* 1rem est généralement équivalent à 16px, mais s'adapte à la taille de la police de base du navigateur */
+  }
+  
+  /* indentation first line */
+  
+  .paragraph::first-line {
+    text-indent: 5%; /* Utilisez un pourcentage pour rendre l'indentation responsive */
+  }
+  
+  /* nav-text */
+  
+  
+  .navTextLight {
+     transition: .5s ease;
+  
+  }
+  
+  .navTextLight:hover{
+  
+    text-shadow: 0 0 5px var(--white),
+    0 0 10px var(--stroke-text-light),
+    0 0 15px var(--Similiblack);
+    -webkit-text-stroke: 0.2px #0f2946!important; /* Largeur et couleur du contour */
+    text-stroke: 0.2px #0f2946!important; /* Largeur et couleur du contour */
+    cursor: pointer;
+  
+  }
+  
+  .navTextDark  {
+  
+    -webkit-text-stroke: 0.1px rgb(128, 198, 215)!important; 
+     text-decoration: none;
+     transition: .5s ease;
+  
+  }
+  
+
+  /* nav-bar style text  */
+
+  .navHomeLight {
+  text-shadow: 0 0 2px var(--Similiblack);
+  text-decoration: none;
+  transition: .5s ease;
+}
+
+.navHomeDark {
+  text-shadow: 0 0 2px rgb(234, 245, 245);
+   text-decoration: none;
+   transition: .5s ease;
+  
+}
+
+
+/* nav-bar route active */
+
+.navTextDark.router-link-exact-active  {
+  color:#FFFF00 !important;
+  -webkit-text-stroke: 0.1px #FFA500 !important; /* Largeur et couleur du contour */
+  font-weight: bold!important;
+}
+
+.navTextLight.router-link-exact-active  {
+  color: white!important;
+  -webkit-text-stroke: 0.1px #f1f4ff !important; /* Largeur et couleur du contour */
+  font-weight: bold!important;
+}
+
+
+  /* media query text reponsive */
+/* mobile format */
+@media (max-width: 576px) {
+  .h1-light, .h1-dark {
+    font-size: 2rem;
+  }
+  .h2-light, .h2-dark {
+    font-size: 1.3rem;
+  }
+
+  .text-contact {
+    font-size: 0.85rem;
+  }
+
+  .text-style, p, li, .nav-link, span {
+    font-size: 1rem;
+  }
+}
+
+/* tablet format*/
+@media (min-width: 577px) and (max-width: 991px) {
+  .h1-light, .h1-dark {
+    font-size: 2.5rem;
+  }
+  .h2-light, .h2-dark {
+    font-size: 1.55rem;
+  }
+  .text-style, p, li, span, .text-color-light, .text-color-dark, .nav a {
+    font-size: 1.10rem;
+  }
+
+  .text-contact {
+    font-size: 0.90rem;
+  }
+
+  .nav-link{
+    font-size: 1.10rem;
+  }
+}
+
+/* desktop format */
+@media (min-width: 992px) {
+  h1 {
+    font-size: 2.55rem;
+  }
+  h2 {
+    font-size: 1.55rem;  }
+  .text-style, p, span, .text-color-dark, .text-color-light, .nav a{
+    font-size: 1.0rem;
+  }
+
+  .text-contact {
+    font-size: 0.8rem;
+  }
+
+  .nav-link{
+    font-size: 1rem;
+  }
+}
+  
