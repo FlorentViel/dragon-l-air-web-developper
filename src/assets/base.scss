@@ -28,6 +28,7 @@
   box-sizing: border-box;
   overflow-x: hidden;
   perspective: 1000px;
+  @include flex-column;
 
 }
 
@@ -38,7 +39,7 @@
   background-size: auto;
   background-size: auto;
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: 100svh;
   
 }
 

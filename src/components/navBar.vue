@@ -4,13 +4,13 @@
               <!-- Profil-picture -->
               <img id="profil_picture" :class="theme.isDarkMode ? 'photo-dark' : 'photo-light'"
                class="img-fluid logo"
-               :src="theme.isDarkMode ? '/front-end/src/assets/images/logos/logo-site/logo-dragonslair-night.png' :
+               :src="theme.isDarkMode ? './assets/images/logos/logo-site/logo-dragonslair-night.png' :
                  '/front-end/src/assets/images/logos/logo-site/logo-dragonslair.png'"
                   alt="Photo de profil"/>
               <div class="d-flex align-items-end flex-wrap flex-grow-1 w-80">
 
                 <router-link 
-                  class="navBar-item nav-link text-center" 
+                  class="navBar-item nav-link " 
                   v-for="(navItem, index) in navBar" 
                   :key="index" 
                   :to="{ name: navItem.route }"
@@ -90,7 +90,14 @@ function changeTitle(newSectionName) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+@import '@/assets/_variables.scss';
+
+#navBar {
+  @include flex-row;
+  align-items: end;
+}
 
 /* logo */
 
@@ -118,6 +125,12 @@ backdrop-filter: blur( 4px );
 -webkit-backdrop-filter: blur( 4px );
 transition: all 0.3s ease-in-out;
 
+}
+
+/* navBarItem */ 
+
+.navBar-item {
+  text-align: center;
 }
 
 /* navBar link */
@@ -288,5 +301,4 @@ transition: all 0.3s ease-in-out;
   }
 
 }
-
 </style>

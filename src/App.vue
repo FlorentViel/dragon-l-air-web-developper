@@ -1,16 +1,18 @@
 <template>
   <div :class="[theme.isDarkMode ? 'backgroundImageDark' : 'backgroundImageLight', $route.name === 'privacyPolicy' ? (theme.isDarkMode ? 'privacyPolicyBackgroundDark' : 'privacyPolicyBackgroundLight') : 'backgroundDefault']" class="d-flex flex-column" @toggle-theme-request="toggleTheme">
         
-    <div id="#main-page" class="d-flex justify-content-center mx-md-5 mx-0">
+    <div id="#main-page">
       <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="computer">
         <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="screen">
           <NavBar :theme="theme" :selectedSection="selectedSection" @toggle-theme-request="toggleTheme" />
+          <main>
+              <router-view :theme="theme" :changeSection="changeSection" v-slot="{ Component }">
+              <transition :name="fade" mode="out-in" appear>
+                  <component :is="Component" />
+              </transition>
+            </router-view>
+          </main>
 
-          <router-view :theme="theme" :changeSection="changeSection" v-slot="{ Component }">
-            <transition :name="fade" mode="out-in" appear>
-                <component :is="Component" />
-            </transition>
-          </router-view>
           <Footer :theme="theme" />
         </div>
       </div>
@@ -24,9 +26,10 @@
 
 <script setup>
 
-import NavBar from './components/navBar.vue';
-import Footer from './components/footer.vue';
-import { ref, readonly } from 'vue';
+import NavBar from '@/components/navBar.vue';
+import Footer from '@/components/footer.vue';
+import { ref, reactive, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 // Homepage
 
@@ -34,12 +37,9 @@ const pageTitle = ref('Portfolio Florent VIEVILLE');
 const selectedSection = ref('A propos'); // Par défaut, afficher la section "Accueil"
 const fade = 'fade';
 
-
-
 const isDarkMode = ref(localStorage.getItem('theme') === 'dark' ? true : false);
 
-
-const theme = readonly({
+const theme = reactive({
   isDarkMode,
   toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
@@ -47,12 +47,38 @@ const theme = readonly({
   },
 });
 
+const tabs = [
+  { title: 'Accueil', route: 'home' },
+  { title: 'A propos de moi', route: 'aboutMe' },
+  { title: 'Mes services', route: 'service' },
+  { title: 'Mes projets', route: 'projet' },
+  { title: 'Contact', route: 'contact' },
+  // Ajoutez autant d'onglets que vous le souhaitez
+];
+
 function changeSection(newSectionName) {
   selectedSection.value = newSectionName; // Mettez à jour la section sélectionnée
-  const baseTitle = 'Florent VIEVILLE - A propos de moi';
+  const baseTitle = 'Dragon\'s l\'Air Web Developper ';
   const newTitle = newSectionName === 'A propos' ? baseTitle : `${baseTitle} - ${newSectionName}`;
   document.title = newTitle; // Mettez à jour le titre de la page
 }
+
+function toggleTheme() {
+  theme.toggleTheme();
+}
+
+const route = useRoute();
+
+watch(route, (newRoute) => {
+  const tab = tabs.find(tab => tab.route === newRoute.name);
+  if (tab) {
+    changeSection(tab.title);
+  }
+});
+
+watch(() => theme.isDarkMode, (newVal) => {
+  localStorage.setItem('theme', newVal ? 'dark' : 'light');
+});
 
 </script>
 
@@ -126,7 +152,16 @@ export default {
 
 </script>
 
+
 <style lang="scss" scoped>
+
+@import './assets/_variables.scss';
+
+
+#main-page {
+  margin: 0 auto;
+  @include flex-center;
+}
 
 
 .fade-enter-active, .fade-leave-active {
@@ -136,9 +171,6 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
-</style>
-
-<style>
 
 /* main */
 
@@ -154,8 +186,8 @@ export default {
 }
 
 .computer.light-mode {
-  background: var(--bluelight);
-  background: var(--borderLightGardient);
+  background: $bluelight ;
+  background: $borderLightGardient;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.5s ease-in-out;
 }
@@ -196,13 +228,12 @@ export default {
   min-height: 500px; /* change 'height' to 'min-height' */
   border-radius: 10px;
   padding: 20px;
-  background: var(--bg-light-1);
   transition: background-color 0.5s ease-in-out;
   /* autres styles de l'écran */
 }
 
 .screen.light-mode {
-  background: var(--bg-light-1);
+  background: $bg-light-1;
   transition: background-color 0.5s ease-in-out;
 
 }

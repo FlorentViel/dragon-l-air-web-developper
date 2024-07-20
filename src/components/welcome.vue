@@ -113,7 +113,7 @@ export default {
 
 .animate-text {
   opacity: 0; /* Set initial opacity to 0 */
-  animation: slideInFromRight 1s ease-out forwards; /* Add 'forwards' to keep the end state of the animation */
+  animation: slideInFromRight 1.6s ease-out forwards; /* Add 'forwards' to keep the end state of the animation */
   animation-delay: var(--delay);
 }
 
