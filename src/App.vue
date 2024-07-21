@@ -1,7 +1,7 @@
 <template>
   <div :class="[theme.isDarkMode ? 'backgroundImageDark' : 'backgroundImageLight', $route.name === 'privacyPolicy' ? (theme.isDarkMode ? 'privacyPolicyBackgroundDark' : 'privacyPolicyBackgroundLight') : 'backgroundDefault']" class="d-flex flex-column" @toggle-theme-request="toggleTheme">
         
-    <div id="#main-page">
+    <div id="#main-page" class="main-bloc">
       <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="computer">
         <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="screen">
           <NavBar :theme="theme" :selectedSection="selectedSection" @toggle-theme-request="toggleTheme" />
@@ -158,8 +158,10 @@ export default {
 @import './assets/_variables.scss';
 
 
-#main-page {
-display: contents
+.main-bloc {
+display: flex;
+justify-content: center;
+
 }
 
 

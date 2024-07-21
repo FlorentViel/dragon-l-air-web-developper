@@ -1,5 +1,5 @@
 <template>
-  <section id="welcome" class="section container py-3">
+  <section id="welcome" class="section container">
     <div class="welcome-content">
       <div class="profile-picture-container">
         <!-- Profil-picture -->
@@ -176,12 +176,16 @@ export default {
   padding: dynamic-padding(2); // 2rem
 }
 
+.content-body {
+  gap: dynamic-padding(1.2);
+  @include flex-column;
+}
+
 .profile-picture-container {
   flex: 1 1 10%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: dynamic-padding(0.5); // 0.5rem
 }
 
 #profil_picture {
@@ -192,7 +196,7 @@ export default {
 
 #content {
   flex: 1 1 60%;
-  padding: dynamic-padding(3);
+  padding: dynamic-padding(2);
   border-radius: 1.5rem;
   transition: 0.5s;
   position: relative;
@@ -200,7 +204,6 @@ export default {
 }
 
 .content-title {
-  margin-bottom: dynamic-padding(3); // 3rem
   text-align: center;
 }
 

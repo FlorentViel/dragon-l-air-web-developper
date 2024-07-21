@@ -1,5 +1,9 @@
 /* global text css */
 
+:root {
+  $linkdark: $StartDarkGradient;
+  
+}
 
 .text-justify {
   text-align: justify !important;
@@ -17,7 +21,7 @@
 }
 
 :is(.h2-light, h2) {
-  color: $EndLightGradient;
+  color: $textSecondaryLight;
 }
 
 :is(.h1-dark) {
@@ -25,7 +29,7 @@
 }
 
 :is(.h2-dark) {
-  color: $EndDarkGradient;
+  color: $textSecondaryDark;
 }
 
 :is(.text-color-dark) {
@@ -40,6 +44,14 @@
   color: $StartDarkGradient;
 }
 
+:is(.fake-search-bar-dark) {
+  color: $textSecondaryDark;
+}
+
+:is(.fake-search-bar-light) {
+  color: $textSecondaryLight;
+}
+
 :is(.footerTextDark:hover) {
   color: $linkdarkhover;
   text-decoration: underline 1px;
@@ -47,13 +59,11 @@
 }
 
 :is(.footerTextDark:hover) {
-  background: $textSecondaryDark;
   border-radius: 5%;
   transition: all 0.5s;
 }
 
 :is(.footerTextLight:hover) {
-  background: $hoverLight;
   border-radius: 5%;
   transition: all 0.5s;
 }
@@ -63,9 +73,9 @@
 }
 
 :is(.footerTextLight:hover, .link-section-light:hover, .link-section-light:focus) {
-  color: $EndLightGradient;
+  color: $textSecondaryLight;
   text-decoration: underline;
-  text-decoration-color: $EndLightGradient;
+  text-decoration-color: $textSecondaryLight;
 }
 
 /* h1, h2 */
@@ -129,7 +139,7 @@
   .navTextLight:hover{
   
     text-shadow: 0 0 5px $textSecondaryLight,
-    0 0 10px $EndLightGradient,
+    0 0 10px $textSecondaryLight,
     0 0 15px $textSecondaryDark;
     -webkit-text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */
     text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */

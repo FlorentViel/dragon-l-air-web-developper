@@ -1,5 +1,5 @@
-
 import './assets/main.scss';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { createApp } from 'vue';
 import { createStore } from 'vuex'; // Import createStore from vuex

@@ -1,18 +1,18 @@
 <template>
   <nav id="navBar" :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'">
-    <div class="navBar-content">
+    <div class="navBar-content" :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'">
       <!-- Profil-picture -->
       <img id="profil_picture" :class="theme.isDarkMode ? 'photo-dark' : 'photo-light'"
            class="logo"
            :src="theme.isDarkMode ? images.nightLogo : images.lightLogo"
            alt="Photo de profil"/>
-      <div class="navBar-links" :class="theme.isDarkMode ? 'navBar-links-dark' : 'navBar-links-light'">
+      <div class="navBar-links" :class="['navBar-links', theme.isDarkMode ? 'navBar-links-dark' : 'navBar-links-light', { 'open': isMenuOpen }]">
         <router-link 
           class="navBar-item" 
           v-for="(navItem, index) in navBar" 
           :key="index" 
           :to="{ name: navItem.route }"
-          :class="[
+          :class="[ 
             theme.isDarkMode ? 'link-section-dark' : 'link-section-light', 
             { 
               'navItem-active-dark': theme.isDarkMode && $route.name === navItem.route,
@@ -23,18 +23,34 @@
           <span :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="close-navItem">x</span>
         </router-link>
       </div>  
+  
     </div>
-
-    <div class="theme-toggle">
-      <span class="theme-toggle-text" :class="theme.isDarkMode ? 'text-white' : 'text-dark'">
-        {{ theme.isDarkMode ? 'Mode jour' : 'Mode nuit' }}
-      </span>
-      <input type="checkbox" class="checkbox" id="checkbox" v-model="theme.isDarkMode" @click="toggleThemeAndEmit">
-      <label for="checkbox" class="checkbox-label" :class="theme.isDarkMode ? 'checkbox-label-dark' : 'checkbox-label-light'">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-        <span class="ball"></span>
-      </label>
+    <div class="fake-search-bar" :class="theme.isDarkMode ? 'fake-search-bar-dark' : 'fake-search-bar-light'">
+      <div class="cadenas-icon" :class="theme.isDarkMode ? 'cadenas-icon-dark' : 'cadenas-icon-light'">
+        <svg v-if="theme.isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.!-->
+          <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" fill="white"/>
+        </svg>
+        <svg v-if="!theme.isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.!-->
+          <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
+        </svg>
+      </div>
+      <span>https://www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
+      <button class="burger-menu" @click="toggleMenu">
+        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
+        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
+        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
+      </button>
+      <div class="theme-toggle">
+        <span class="theme-toggle-text" :class="theme.isDarkMode ? 'text-white' : 'text-dark'">
+          {{ theme.isDarkMode ? 'Mode jour' : 'Mode nuit' }}
+        </span>
+        <input type="checkbox" class="checkbox" id="checkbox" v-model="theme.isDarkMode" @click="toggleThemeAndEmit">
+        <label for="checkbox" class="checkbox-label" :class="theme.isDarkMode ? 'checkbox-label-dark' : 'checkbox-label-light'">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
     </div>
   </nav>
 </template>
@@ -47,19 +63,29 @@ export default {
     return {
       activenavItem: 0,
       navBar: [
-        { title: 'Florent VIEVILLE', route: 'home' },
+        { title: 'Accueil', route: 'home' },
         { title: '\u00C0 propos', route: 'aboutMe' },
         { title: 'Mes service', route: 'service' },
         { title: 'Mes projets', route: 'projet' },
         { title: 'Contact', route: 'contact' },
       ],
+      images, // Ajoutez les images à l'état local
+      isMenuOpen: false, // État pour le menu burger
     };
   },
   props: ['theme'],
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    }
+  },
   methods: {
     toggleThemeAndEmit() {
       this.theme.toggleTheme();
       this.$emit('toggle-theme-request');
+    },
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
     },
     changeTitle(title, toRoute) {
       const fromRoute = this.$route.name;
@@ -91,32 +117,10 @@ function changeTitle(newSectionName) {
   top: 0;
   z-index: 100;
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
 
-
-  &.dark-mode {
-    background-color: $bgDarkNav;
-    border-bottom: 1px solid $borderDark;
-    a {
-      box-shadow: 0 8px 32px 0 $shadow;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      transition: all 1s ease-in-out;
-    }
-  }
-  &.light-mode {
-
-    background-color: $bgLightNav;
-    border-bottom: 1px solid $borderLight;
-
-    a {
-      box-shadow: 0 8px 32px 0 $shadow;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      transition: all 1s ease-in-out;
-    }
-  }
 
   @media (max-width: 985px) {
     flex-direction: column;
@@ -125,15 +129,58 @@ function changeTitle(newSectionName) {
 
 .navBar-content {
   display: flex;
-  align-items: center;
+  align-items: end;
   width: 100%;
+
+  @media (max-width: 985px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.light-mode {
+    background-color: $bgLightNav;
+    border-bottom: 1px solid $borderLight;
+  }
+
+  &.dark-mode {
+    background-color: $bgDarkNav;
+    border-bottom: 1px solid $borderDark;
+  }
 }
+
+.fake-search-bar {
+
+  &.fake-search-bar-light {
+    background-color: $bgLight1;
+    color: $linkLight;
+  }
+
+  &.fake-search-bar-dark {
+    background-color: $bgDark1;
+    color: $linkdark;
+  }
+
+  .cadenas-icon {
+    margin-right: dynamic-padding(1.5);
+    margin-left: dynamic-padding(1);
+    width: 20px;
+    height: 20px;
+  }
+
+}
+
+
 
 .logo {
   width: 45px;
   height: 45px;
   padding: 5px;
   transition: all 0.3s ease-in-out;
+
+  @media (max-width: 985px) {
+    width: 85px;
+    height: 85px;
+  }
 }
 
 .navBar-links {
@@ -142,6 +189,19 @@ function changeTitle(newSectionName) {
   flex-grow: 1;
   flex-wrap: wrap;
   width: 80%;
+  transition: max-height 0.3s ease-in-out;
+
+  @media (max-width: 985px) {
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+
+    &.open {
+      max-height: 300px; // Ajustez cette valeur selon la hauteur de votre menu
+    }
+  }
 }
 
 .navBar-item {
@@ -154,21 +214,21 @@ function changeTitle(newSectionName) {
     transition: background-color 0.3s ease-in-out;
 
     &:hover {
-      background-color: $bgDark1;
+      background-color: $StartDarkGradient-50;
       transition: background-color 0.3s ease-in-out;
     }
   }
   &.link-section-light {
-    background-color: rgb(230, 238, 239);
+    background-color: $bgLightNav;
     transition: background-color 0.3s ease-in-out;
 
     &:hover {
-      background-color: $bgLight1;
+      background-color: $StartLightGradient-50;
       transition: background-color 0.3s ease-in-out;
     }
   }
   &.navItem-active-dark {
-    background: rgba(0, 36, 41);
+    background: $bgDark1;
     border: 1px solid $borderDark;
     margin-bottom: -1px;
     border-bottom: 2px solid $bgDark1;
@@ -176,7 +236,7 @@ function changeTitle(newSectionName) {
     transition: border-bottom 1s ease-in-out;
   }
   &.navItem-active-light {
-    background: rgba(255, 255, 255, 0.8);
+    background: $bgLight1;
     border: 1px solid $borderLight;
     border-bottom: 2px solid $bgLight1;
     border-radius: 5px 5px 0 0;
@@ -188,8 +248,9 @@ function changeTitle(newSectionName) {
 .theme-toggle {
   display: flex;
   align-items: end;
-  gap: 10px;
-  width: 250px;
+  justify-content: end;
+  gap: 2px;
+  flex: 1 1 auto;
   margin: auto;
   .text-white {
     color: white;
@@ -266,9 +327,77 @@ function changeTitle(newSectionName) {
   }
 }
 
+.fake-search-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.fake-search-bar-light {
+  background-color: #f0f0f0;
+  color: #333;
+  
+
+  &:hover {
+    background-color: $StartLightGradient-50;
+  }
+}
+
+.fake-search-bar-dark {
+  background-color: #333;
+  color: #f0f0f0;
+
+  &:hover {
+    background-color: $StartDarkGradient-50;
+  }
+}
+
 @media (max-width: 984px) {
   #navBar a {
     width: 100%;
+  }
+}
+
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  margin: 0 dynamic-padding(1);
+  
+
+  .burger-menu-span {
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    &.burger-dark {
+      background-color: $textPrimaryDark;
+  }
+
+  &.burger-light {
+      background-color: $textPrimaryLight;
+    
+  }
+  }
+
+
+
+  @media (max-width: 985px) {
+    display: flex;
   }
 }
 </style>
