@@ -177,3 +177,24 @@ $container-max-widths: (
     }
   }
 }
+
+// Fonction pour calculer la taille de la police dynamique
+@function responsive-font-size($min-size, $max-size) {
+  $breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+  );
+
+  $min-width: map-get($breakpoints, sm);
+  $max-width: map-get($breakpoints, xxl);
+
+  @return calc(#{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}) / (#{$max-width} - #{$min-width})));
+}
+
+// Mixin pour appliquer la taille de la police responsive
+@mixin font-size-responsive($min-size, $max-size) {
+  font-size: responsive-font-size($min-size, $max-size);
+}

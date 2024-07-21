@@ -165,11 +165,12 @@ export default {
 #welcome {
   padding: dynamic-padding(1); // 1rem
   overflow-x: hidden;
+
+
 }
 
 .welcome-content {
-  display: flex;
-  flex-wrap: wrap;
+  @include flex-row;
   justify-content: space-between;
   align-items: center;
   position: relative;
@@ -190,6 +191,10 @@ export default {
 
 #profil_picture {
   border-radius: 50%;
+  @media (max-width: 768px) {
+    width: 250px;
+    margin-bottom: dynamic-padding(2); // 2rem
+  }
 }
 
 
@@ -201,6 +206,11 @@ export default {
   transition: 0.5s;
   position: relative;
   height: max-content;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex: 1 1 100%;
+  }
 }
 
 .content-title {

@@ -6,7 +6,11 @@
 }
 
 .text-justify {
-  text-align: justify !important;
+  text-align: justify;
+}
+
+.centered {
+  text-align: center;
 }
 
 :is(.navItem button, p, label, h1, #navBar, span, a, body) {
@@ -154,6 +158,32 @@
      transition: .5s ease;
   
   }
+
+  .centered {
+  text-align: center;
+}
+
+
+.style-text {
+  font-family: $font-family;
+}
+
+
+.footerTextDark {
+  color: $linkdark;
+}
+
+.footerTextLight {
+  color: $linkLight;
+}
+
+.text-color-dark {
+  color: $textPrimaryDark;
+}
+
+.text-color-light {
+  color: $textPrimaryLight;
+}
   
 
   /* nav-bar style text  */
@@ -172,6 +202,7 @@
 }
 
 
+
 /* nav-bar route active */
 
 .navTextDark.router-link-exact-active  {
@@ -188,8 +219,9 @@
 
 
   /* media query text reponsive */
+
 /* mobile format */
-@media (max-width: 576px) {
+/*@media (max-width: 576px) {
   .h1-light, .h1-dark {
     font-size: 2rem;
   }
@@ -207,7 +239,7 @@
 }
 
 /* tablet format*/
-@media (min-width: 577px) and (max-width: 991px) {
+/*@media (min-width: 577px) and (max-width: 991px) {
   .h1-light, .h1-dark {
     font-size: 2.5rem;
   }
@@ -228,7 +260,7 @@
 }
 
 /* desktop format */
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
   h1 {
     font-size: 2.55rem;
   }
@@ -245,5 +277,16 @@
   .nav-link{
     font-size: 1rem;
   }
-}
+}*/
   
+h1 {
+  @include font-size-responsive(1.5rem, 3rem);
+}
+
+p {
+  @include font-size-responsive(1rem, 1.5rem);
+}
+
+span {
+  @include font-size-responsive(1rem, 1.5rem);
+}
