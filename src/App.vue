@@ -159,8 +159,7 @@ export default {
 
 
 #main-page {
-  margin: 0 auto;
-  @include flex-center;
+display: contents
 }
 
 
@@ -178,7 +177,7 @@ export default {
 
 .computer {
   width: 85%;
-  margin: 5% auto;
+  max-width: 1200px;
   border-radius: 15px;
   padding: 20px;
   position: relative;
@@ -189,15 +188,15 @@ export default {
   background: $bluelight ;
   background: $borderLightGardient;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 1s ease-in-out;
 }
 
 .computer.dark-mode {
   background: rgb(51,66,255); 
-  background: linear-gradient(180deg, var(--StartDarkGradient) 0%, var(--EndDarkGradient) 75%);
+  background: $borderDarkGardient;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 1s ease-in-out;
 }
 
 .computer::before {
@@ -205,6 +204,7 @@ export default {
   position: absolute;
   top: -30px;
   left: 50%;
+  max-height: 600px;
   transform: translateX(-50%);
   width: 0;
   height: 0;
@@ -213,7 +213,7 @@ export default {
 }
 
 .computer.dark-mode::before {
-  border-bottom: 30px solid var(--EndDarkGradient);
+  border-bottom: 30px solid $EndDarkGradient;
 
 }
 
@@ -225,29 +225,31 @@ export default {
 }
 
 .screen {
-  min-height: 500px; /* change 'height' to 'min-height' */
+  height: max-content;
   border-radius: 10px;
-  padding: 20px;
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 1s ease-in-out;
+  max-height: 600px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+
   /* autres styles de l'écran */
 }
 
 .screen.light-mode {
-  background: $bg-light-1;
-  transition: background-color 0.5s ease-in-out;
-
+  background: $bgLight1;
+  transition: background-color 1s ease-in-out;
 }
 
 .screen.dark-mode {
-  background: var(--bg-dark-1);
-  transition: background-color 0.5s ease-in-out;
+  background: $bgDark1;
+  transition: background-color 1s ease-in-out;
 }
 
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100svh;
+  max-height: 100vh;
+  max-width: 100%;
 
 }
 

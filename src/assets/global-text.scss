@@ -1,84 +1,78 @@
 /* global text css */
 
+
 .text-justify {
-  text-align: justify!important;
+  text-align: justify !important;
 }
 
-:is( .navItem button , p , label, h1, #navBar, span, a, body ){
-  font-family: 'Montserrat', sans-serif!important;
+:is(.navItem button, p, label, h1, #navBar, span, a, body) {
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 /* color white */
 
-:is(.h1-light){
-  color: var(--StartLightGradient);
-  -webkit-text-stroke: 0px !important; 
-
+:is(.h1-light) {
+  color: $StartLightGradient;
+  -webkit-text-stroke: 0px !important;
 }
 
-:is(.h2-light, h2){
-  color: var(--EndLightGradient);
-  
+:is(.h2-light, h2) {
+  color: $EndLightGradient;
 }
 
-
-:is(.h1-dark){
-  color: var(--textPrimaryDark);
+:is(.h1-dark) {
+  color: $textPrimaryDark;
 }
 
-:is(.h2-dark){
-  color: var(--EndDarkGradient);
+:is(.h2-dark) {
+  color: $EndDarkGradient;
 }
 
-:is(.text-color-dark){
-  color: var(--textSecondaryDark);
+:is(.text-color-dark) {
+  color: $textSecondaryDark;
 }
 
-:is(.text-color-light){
-  color: var(--textSecondaryLight);
+:is(.text-color-light) {
+  color: $textSecondaryLight;
 }
 
-:is(.footerTextDark, .link-section-dark){
-  color: var(--StartDarkGradient);
+:is(.footerTextDark, .link-section-dark) {
+  color: $StartDarkGradient;
 }
 
-:is(.footerTextDark:hover){
-  color: var(--linkdarkhover);
-  text-decoration: underline 1px ;
-  text-decoration-color: var(--linkdarkhover);
-
-
+:is(.footerTextDark:hover) {
+  color: $linkdarkhover;
+  text-decoration: underline 1px;
+  text-decoration-color: $linkdarkhover;
 }
 
-:is(.footerTextDark:hover){
-  background: #4827FE55;
+:is(.footerTextDark:hover) {
+  background: $textSecondaryDark;
   border-radius: 5%;
   transition: all 0.5s;
 }
 
-:is(.footerTextLight:hover){
-  background:var(--hoverLight);
+:is(.footerTextLight:hover) {
+  background: $hoverLight;
   border-radius: 5%;
   transition: all 0.5s;
 }
 
-:is(.footerTextLight, .link-section-light){
-  color: var(--StartLightGradient);
+:is(.footerTextLight, .link-section-light) {
+  color: $StartLightGradient;
 }
 
-:is( .footerTextLight:hover, .link-section-light:hover .link-section-light:focus){
-  color: var(--EndLightGradient);
+:is(.footerTextLight:hover, .link-section-light:hover, .link-section-light:focus) {
+  color: $EndLightGradient;
   text-decoration: underline;
-  text-decoration-color: var(--EndLightGradient);
+  text-decoration-color: $EndLightGradient;
 }
-
-
 
 /* h1, h2 */
   
   h1, h2{
     transition: .5s ease;
-    font-weight: bold!important;  
+    font-weight: bold !important;  
   }
 
 
@@ -87,20 +81,20 @@
 
   
   .text-style {
-    font-style: normal!important;
-    font-weight: 400!important;
-    line-height: normal!important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
   }
   
   .text-color-dark{
-    font-weight: 400!important;
+    font-weight: 400 !important;
     transition: .5s ease;
   
   }
 
     
   .text-color-light{
-    font-weight: 400!important;
+    font-weight: 400 !important;
     transition: .5s ease;
   
   }
@@ -134,18 +128,18 @@
   
   .navTextLight:hover{
   
-    text-shadow: 0 0 5px var(--white),
-    0 0 10px var(--stroke-text-light),
-    0 0 15px var(--Similiblack);
-    -webkit-text-stroke: 0.2px #0f2946!important; /* Largeur et couleur du contour */
-    text-stroke: 0.2px #0f2946!important; /* Largeur et couleur du contour */
+    text-shadow: 0 0 5px $textSecondaryLight,
+    0 0 10px $EndLightGradient,
+    0 0 15px $textSecondaryDark;
+    -webkit-text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */
+    text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */
     cursor: pointer;
   
   }
   
   .navTextDark  {
   
-    -webkit-text-stroke: 0.1px rgb(128, 198, 215)!important; 
+    -webkit-text-stroke: 0.1px rgb(128, 198, 215) !important; 
      text-decoration: none;
      transition: .5s ease;
   
@@ -155,7 +149,7 @@
   /* nav-bar style text  */
 
   .navHomeLight {
-  text-shadow: 0 0 2px var(--Similiblack);
+  text-shadow: 0 0 2px $textSecondaryDark;
   text-decoration: none;
   transition: .5s ease;
 }
@@ -171,15 +165,15 @@
 /* nav-bar route active */
 
 .navTextDark.router-link-exact-active  {
-  color:#FFFF00 !important;
+  color: #FFFF00 !important;
   -webkit-text-stroke: 0.1px #FFA500 !important; /* Largeur et couleur du contour */
-  font-weight: bold!important;
+  font-weight: bold !important;
 }
 
 .navTextLight.router-link-exact-active  {
-  color: white!important;
-  -webkit-text-stroke: 0.1px #f1f4ff !important; /* Largeur et couleur du contour */
-  font-weight: bold!important;
+  color: white !important;
+  -webkit-text-stroke: 0.1px $textSecondaryLight !important; /* Largeur et couleur du contour */
+  font-weight: bold !important;
 }
 
 

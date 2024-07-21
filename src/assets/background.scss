@@ -1,4 +1,17 @@
 /* style background et style bloc - btn  */
+@import '@/assets/_variables.scss';
+
+/* background css */
+
+.backgroundDefault {
+  background-size: auto;
+  background-size: auto;
+  @include flex-center;
+  @include flex-column;
+  width: 100vw;
+  height: 100svh;
+  
+}
 
 
 .backgroundImageLight {
@@ -20,9 +33,9 @@
 
 
   .main-bloc-light{
-    background: var(--bg-light-2);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    border: 10px solid var(--StartLightGradient);
+    background: $bgLight2;
+    box-shadow: 0 8px 32px 0 rgba( 3, 38, 135, 0.37 );
+    border: 10px solid $StartLightGradient;
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
     border-radius: 10px;
@@ -31,8 +44,8 @@
   }
   
   .main-bloc-dark {
-    background: var(--bg-dark-2);
-    border: 10px solid var(--borderDark);
+    background: $bgDark2;
+    border: 10px solid $borderDark;
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
@@ -51,7 +64,7 @@
 
 .nav-Light {
   /*background: rgba(69, 144, 255, 0.833);*/
-  background: var(--bglight2) ;
+  background: $bgLight2;
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 
   
@@ -82,19 +95,19 @@
 /* btn css */
 
 .btn-dark-mode {
-  background-image: linear-gradient(0deg, var(--StartDarkGradient) 0%, var(--EndDarkGradient) 75%);
-  color: var(--white);
-  border: 1px solid var(--borderDark);
+  background: $borderDarkGardient;
+  color: $white;
+  border: 1px solid $borderDark;
   transition: .5s ease;
   border-radius: 8px;
   padding: 10px 20px;
 } 
 
 .btn-light-mode {
-  background-image: linear-gradient(0deg, var(--StartLightGradient) 0%, var(--EndLightGradient) 75%);
-  color: var(--white);
+  background: $StartLightGradient;
+  color: $white;
   
-  border: 1px solid var(--StartLightGradient);
+  border: 1px solid $StartLightGradient;
   transition: .5s ease;
   border-radius: 8px;
   padding: 10px 20px;
