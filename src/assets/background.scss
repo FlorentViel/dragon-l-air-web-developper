@@ -10,22 +10,12 @@
   @include flex-column;
   width: 100vw;
   height: 100svh;
-  
-}
-
-
-.backgroundImageLight {
-  background-image: $background-image-light;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-.backgroundImageDark {
-  background-image: $background-image-dark;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
+
+
 
 
   /*aboutme blocbackground */

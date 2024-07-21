@@ -1,64 +1,30 @@
 <template>
   <nav id="navBar" :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'">
     <div class="navBar-content" :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'">
-      <!-- Profil-picture -->
-      <img id="profil_picture" :class="theme.isDarkMode ? 'photo-dark' : 'photo-light'"
-           class="logo"
-           :src="theme.isDarkMode ? images.nightLogo : images.lightLogo"
-           alt="Photo de profil"/>
-      <div class="navBar-links" :class="['navBar-links', theme.isDarkMode ? 'navBar-links-dark' : 'navBar-links-light', { 'open': isMenuOpen }]">
-        <router-link 
-          class="navBar-item" 
-          v-for="(navItem, index) in navBar" 
-          :key="index" 
-          :to="{ name: navItem.route }"
-          :class="[ 
-            theme.isDarkMode ? 'link-section-dark' : 'link-section-light', 
-            { 
-              'navItem-active-dark': theme.isDarkMode && $route.name === navItem.route,
-              'navItem-active-light': !theme.isDarkMode && $route.name === navItem.route
-            }
-          ]">
-          {{ navItem.title }}
-          <span :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="close-navItem">x</span>
-        </router-link>
-      </div>  
-  
+      <Logo :theme="theme" />
+      <NavBarLinks :theme="theme" :navBar="navBar" :isMenuOpen="isMenuOpen" />
     </div>
-    <div class="fake-search-bar" :class="theme.isDarkMode ? 'fake-search-bar-dark' : 'fake-search-bar-light'">
-      <div class="cadenas-icon" :class="theme.isDarkMode ? 'cadenas-icon-dark' : 'cadenas-icon-light'">
-        <svg v-if="theme.isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.!-->
-          <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" fill="white"/>
-        </svg>
-        <svg v-if="!theme.isDarkMode" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.!-->
-          <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
-        </svg>
-      </div>
-      <span>https://www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
-      <button class="burger-menu" @click="toggleMenu">
-        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
-        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
-        <span class="burger-menu-span" :class="theme.isDarkMode ? 'burger-dark' : 'burger-light'"></span>
-      </button>
-      <div class="theme-toggle">
-        <span class="theme-toggle-text" :class="theme.isDarkMode ? 'text-white' : 'text-dark'">
-          {{ theme.isDarkMode ? 'Mode jour' : 'Mode nuit' }}
-        </span>
-        <input type="checkbox" class="checkbox" id="checkbox" v-model="theme.isDarkMode" @click="toggleThemeAndEmit">
-        <label for="checkbox" class="checkbox-label" :class="theme.isDarkMode ? 'checkbox-label-dark' : 'checkbox-label-light'">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-          <span class="ball"></span>
-        </label>
-      </div>
-    </div>
+    <FakeSearchBar :theme="theme" :currentRouteName="currentRouteName" :isRightMenuOpen="isRightMenuOpen" @toggle-menu="toggleMenu" @toggle-right-menu="toggleRightMenu" />
+    <RightMenu :theme="theme" :isRightMenuOpen="isRightMenuOpen" :backgroundImages="backgroundImages" :selectedBackground="selectedBackground" @toggle-right-menu="toggleRightMenu" @toggle-theme-request="toggleThemeAndEmit" @change-background="changeBackground" />
   </nav>
 </template>
 
 <script>
+import Logo from '@/views/Logo.vue';  
+import NavBarLinks from '@/views/NavBarLinks.vue';
+import BurgerMenu from '@/views/BurgerMenu.vue';
+import RightMenu from '@/views/RightMenu.vue';
+import FakeSearchBar from '@/views/FakeSearchBar.vue';
 import { images } from '@/config/images';
 
 export default {
+  components: {
+    Logo,
+    NavBarLinks,
+    BurgerMenu,
+    RightMenu,
+    FakeSearchBar
+  },
   data() {
     return {
       activenavItem: 0,
@@ -71,6 +37,13 @@ export default {
       ],
       images, // Ajoutez les images à l'état local
       isMenuOpen: false, // État pour le menu burger
+      isRightMenuOpen: false, // État pour le menu de droite
+      backgroundImages: [
+        images.nightBackground,
+        images.dayBackground,
+      ],
+      selectedBackground: '',
+      lightModeBackground: images.dayBackground, // Remplacez par le chemin de l'image par défaut pour le mode clair
     };
   },
   props: ['theme'],
@@ -87,30 +60,36 @@ export default {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
     },
-    changeTitle(title, toRoute) {
-      const fromRoute = this.$route.name;
-      this.transitionName = this.getTransitionName(fromRoute, toRoute);
-      this.$store.commit('setTitle', title);
+    toggleRightMenu() {
+      this.isRightMenuOpen = !this.isRightMenuOpen;
+    },
+    changeBackground(image) {
+      this.selectedBackground = image;
+      localStorage.setItem('selectedBackground', image);
+      document.body.style.backgroundImage = `url(${image})`;
     },
   },
+  watch: {
+    selectedBackground(newImage) {
+      document.body.style.backgroundImage = `url(${newImage})`;
+    }
+  },
+  mounted() {
+    const storedBackground = localStorage.getItem('selectedBackground');
+    if (storedBackground) {
+      this.selectedBackground = storedBackground;
+    } else {
+      this.selectedBackground = this.lightModeBackground;
+    }
+    document.body.style.backgroundImage = `url(${this.selectedBackground})`;
+  }
 };
-</script>
-
-<script setup>
-import { ref } from 'vue';
-
-const selectedSection = ref('Accueil');
-
-function changeTitle(newSectionName) {
-  const baseTitle = 'Portfolio Florent VIEVILLE';
-  const newTitle = newSectionName === 'Accueil' ? baseTitle : `${baseTitle} - ${newSectionName}`;
-  document.title = newTitle;
-  selectedSection.value = newSectionName;
-}
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/_variables.scss';
+
+/* navBar scss */
 
 #navBar {
   position: sticky;
@@ -120,7 +99,6 @@ function changeTitle(newSectionName) {
   flex-direction: column;
   align-items: center;
   margin: 0;
-
 
   @media (max-width: 985px) {
     flex-direction: column;
@@ -148,40 +126,8 @@ function changeTitle(newSectionName) {
   }
 }
 
-.fake-search-bar {
-
-  &.fake-search-bar-light {
-    background-color: $bgLight1;
-    color: $linkLight;
-  }
-
-  &.fake-search-bar-dark {
-    background-color: $bgDark1;
-    color: $linkdark;
-  }
-
-  .cadenas-icon {
-    margin-right: dynamic-padding(1.5);
-    margin-left: dynamic-padding(1);
-    width: 20px;
-    height: 20px;
-  }
-
-}
 
 
-
-.logo {
-  width: 45px;
-  height: 45px;
-  padding: 5px;
-  transition: all 0.3s ease-in-out;
-
-  @media (max-width: 985px) {
-    width: 85px;
-    height: 85px;
-  }
-}
 
 .navBar-links {
   display: flex;
@@ -248,10 +194,7 @@ function changeTitle(newSectionName) {
 .theme-toggle {
   display: flex;
   align-items: center;
-  justify-content: end;
   gap: 2px;
-  flex: 1 1 auto;
-  margin: auto;
   .text-white {
     color: white;
   }
@@ -282,21 +225,15 @@ function changeTitle(newSectionName) {
 
 .checkbox-label-light {
   background: linear-gradient(90deg, $StartLightGradient 0%, $EndLightGradient  75%);
-
-
 }
 
 .checkbox-label-dark {
-
   background: linear-gradient(90deg, $StartDarkGradient 0%, $EndDarkGradient  75%);
 }
-
-
 
 .fa-moon {color: #fffdf7;}
 
 .fa-sun {color: #fffb00;}
-
 
 .checkbox-label .ball {
   width: 22px;
@@ -321,7 +258,6 @@ function changeTitle(newSectionName) {
 .checkbox:checked + .checkbox-label .ball {
   transform: translateX(24px);
 }
-
 
 .close-navItem {
   display: inline-block;
@@ -353,7 +289,6 @@ function changeTitle(newSectionName) {
 .fake-search-bar-light {
   background-color: #f0f0f0;
   color: #333;
-  
 
   &:hover {
     background-color: $StartLightGradient-50;
@@ -387,7 +322,6 @@ function changeTitle(newSectionName) {
   padding: 0;
   z-index: 10;
   margin: 0 dynamic-padding(1);
-  
 
   .burger-menu-span {
     width: 100%;
@@ -396,18 +330,90 @@ function changeTitle(newSectionName) {
     transition: all 0.3s linear;
     &.burger-dark {
       background-color: $textPrimaryDark;
-  }
+    }
 
-  &.burger-light {
+    &.burger-light {
       background-color: $textPrimaryLight;
-    
+    }
   }
-  }
-
-
 
   @media (max-width: 985px) {
     display: flex;
+  }
+}
+
+.burger-menu-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30px;
+  height: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+  margin: 0 dynamic-padding(1);
+  transform: rotate(90deg);
+
+  .burger-menu-span {
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    &.burger-dark {
+      background-color: $textPrimaryDark;
+    }
+
+    &.burger-light {
+      background-color: $textPrimaryLight;
+    }
+  }
+}
+
+.right-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: $bgDarkNav;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  @include flex-column;
+  gap: 10px;
+  align-items: center;
+  padding: 20px;
+  z-index: 100;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .theme-toggle {
+    margin-bottom: 20px;
+  }
+
+  .background-carousel {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+
+    .carousel-item {
+      margin-bottom: 10px;
+
+      img {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 5px;
+
+        &.selected {
+          border-color: $StartDarkGradient;
+        }
+      }
+    }
   }
 }
 </style>
