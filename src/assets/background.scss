@@ -3,9 +3,7 @@
 
 /* background css */
 
-.backgroundDefault {
-  background-size: auto;
-  background-size: auto;
+body {
   @include flex-center;
   @include flex-column;
   width: 100vw;

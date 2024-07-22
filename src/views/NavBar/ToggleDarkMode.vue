@@ -67,6 +67,10 @@
   .checkbox-label-dark {
     background: linear-gradient(90deg, $StartDarkGradient 0%, $EndDarkGradient  75%);
   }
+
+  .fas {
+    font-size: 16px!important;
+  }
   
   .fa-moon {color: #fffdf7;}
   

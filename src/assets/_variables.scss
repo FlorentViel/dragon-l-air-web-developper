@@ -6,9 +6,8 @@ $black: #000000;
 
 $bluelight: rgb(74,204,236);
 $StartLightGradient: rgb(116, 108, 247);
-$StartLightGradient-50: rgb(116, 108, 247, 0.5);
+$StartLightGradient-50: rgba(116, 108, 247, 0.5);
 $EndLightGradient: rgb(74,204,234);
-$textSecondaryLight: #000;
 $linkLight: $black;
 $borderLightGardient: linear-gradient(0deg, rgb(74,204,234) 0%, rgb(116, 108, 247) 75%);
 $hoverLight: #8F04FF1A;
@@ -25,7 +24,7 @@ $bgLight3: #DFF9FF;
 /* Theme dark */
 
 $StartDarkGradient: rgb(51,66,255);
-$StartDarkGradient-50: rgb(51,66,255, 0.5);
+$StartDarkGradient-50: rgba(51,66,255, 0.5);
 $EndDarkGradient: rgb(115 0 255);
 $borderDarkGardient: linear-gradient(0deg, rgb(51,66,255) 0%, rgb(115 0 255) 75%);
 $linkdark: $white;
@@ -37,7 +36,6 @@ $bgLightNav: #f9feff;
 
 
 $textPrimaryLight: $StartLightGradient;
-$textSecondaryLight: $EndDarkGradient;
 
 $textPrimaryDark: $StartDarkGradient;
 $textSecondaryDark: #E5EDFF;
@@ -178,23 +176,23 @@ $container-max-widths: (
   }
 }
 
-// Fonction pour calculer la taille de la police dynamique
-@function responsive-font-size($min-size, $max-size) {
-  $breakpoints: (
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1400px
-  );
-
-  $min-width: map-get($breakpoints, sm);
-  $max-width: map-get($breakpoints, xxl);
-
-  @return calc(#{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}) / (#{$max-width} - #{$min-width})));
-}
-
 // Mixin pour appliquer la taille de la police responsive
 @mixin font-size-responsive($min-size, $max-size) {
-  font-size: responsive-font-size($min-size, $max-size);
+  font-size: $min-size;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $min-size;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: calc(#{$min-size} + (#{$max-size} - #{$min-size}) * 0.5);
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: calc(#{$min-size} + (#{$max-size} - #{$min-size}) * 0.75);
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: $max-size;
+  }
 }

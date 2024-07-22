@@ -1,9 +1,7 @@
 <template>
   <div class="right-menu" :class="{ 'open': isRightMenuOpen, 'dark-mode': theme.isDarkMode, 'light-mode': !theme.isDarkMode }">
     <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" />
-
     <ToggleDarkMode :theme="theme" @toggle-theme-request="toggleThemeAndEmit" />
-
     <div class="background-carousel">
       <div v-for="(image, index) in backgroundImages" :key="index" class="carousel-item">
         <img :src="image" @click="changeBackground(image)" :class="{ 'selected': selectedBackground === image }" />
@@ -41,18 +39,20 @@ export default {
 @import '@/assets/_variables.scss';
 
 .right-menu {
-  position: fixed;
+  position: absolute; /* Change from fixed to absolute */
   top: 0;
   right: 0;
   width: 300px;
-  height: 100%;
+  height: 100%; /* Change to 100% to ensure it takes the full height of the parent */
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
-  @include flex-column;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   align-items: center;
   padding: 20px;
   z-index: 100;
+  overflow-y: auto; /* Ajouté pour permettre le défilement vertical */
 
   &.open {
     transform: translateX(0);

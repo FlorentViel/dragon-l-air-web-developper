@@ -15,34 +15,54 @@
       {{ navItem.title }}
       <span :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="close-navItem">x</span>
     </router-link>
+    <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" v-if="!isMenuOpen" /> 
   </div>
+  
 </template>
 
 <script>
+import BurgerMenu from './BurgerMenu.vue';
+
+
 export default {
-  props: ['theme', 'navBar', 'isMenuOpen']
+  components: {
+    BurgerMenu
+  },
+  props: ['theme', 'navBar', 'isMenuOpen', 'isRightMenuOpen'],
+  methods: {
+    toggleRightMenu() {
+      this.$emit('toggle-right-menu');
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 @import '@/assets/_variables.scss';
 
+.burger-menu {    
+  align-self: center;
+  margin-right: 10px;
+}
 
 .navBar-links {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  flex-wrap: wrap;
   width: 80%;
+  flex-wrap: wrap;
   transition: max-height 0.3s ease-in-out;
 
   @media (max-width: 985px) {
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
     max-height: 0;
     overflow: hidden;
     width: 100%;
+
+    a{
+      width: 100%;
+    }
 
     &.open {
       max-height: 300px; // Ajustez cette valeur selon la hauteur de votre menu
@@ -90,5 +110,4 @@ export default {
     margin-bottom: -1px;
   }
 }
-
 </style>

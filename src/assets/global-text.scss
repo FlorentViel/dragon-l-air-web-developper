@@ -22,26 +22,30 @@
 :is(.h1-light) {
   color: $StartLightGradient;
   -webkit-text-stroke: 0px !important;
+  @include font-size-responsive(2rem, 3rem);
 }
 
 :is(.h2-light, h2) {
-  color: $textSecondaryLight;
+  color: $EndLightGradient;
+  @include font-size-responsive(1.5rem, 2.5rem);
 }
 
 :is(.h1-dark) {
   color: $textPrimaryDark;
+  @include font-size-responsive(2rem, 3rem);
 }
 
 :is(.h2-dark) {
-  color: $textSecondaryDark;
+  color: $EndDarkGradient;
+  @include font-size-responsive(1.5rem, 2.5rem);
 }
 
 :is(.text-color-dark) {
-  color: $textSecondaryDark;
+  color: $white;
 }
 
 :is(.text-color-light) {
-  color: $textSecondaryLight;
+  color: $black;
 }
 
 :is(.footerTextDark, .link-section-dark) {
@@ -53,7 +57,7 @@
 }
 
 :is(.fake-search-bar-light) {
-  color: $textSecondaryLight;
+  color: $black;
 }
 
 :is(.footerTextDark:hover) {
@@ -77,14 +81,14 @@
 }
 
 :is(.footerTextLight:hover, .link-section-light:hover, .link-section-light:focus) {
-  color: $textSecondaryLight;
+  color: $black;
   text-decoration: underline;
-  text-decoration-color: $textSecondaryLight;
+  text-decoration-color: $black;
 }
 
 /* h1, h2 */
   
-  h1, h2{
+h1, h2{
     transition: .5s ease;
     font-weight: bold !important;  
   }
@@ -124,6 +128,7 @@
   
   p, label {
     font-size: 1rem; /* 1rem est généralement équivalent à 16px, mais s'adapte à la taille de la police de base du navigateur */
+    @include font-size-responsive(1rem, 1.5rem);
   }
   
   /* indentation first line */
@@ -142,8 +147,8 @@
   
   .navTextLight:hover{
   
-    text-shadow: 0 0 5px $textSecondaryLight,
-    0 0 10px $textSecondaryLight,
+    text-shadow: 0 0 5px $black,
+    0 0 10px $black,
     0 0 15px $textSecondaryDark;
     -webkit-text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */
     text-stroke: 0.2px #0f2946 !important; /* Largeur et couleur du contour */
@@ -167,126 +172,4 @@
 .style-text {
   font-family: $font-family;
 }
-
-
-.footerTextDark {
-  color: $linkdark;
-}
-
-.footerTextLight {
-  color: $linkLight;
-}
-
-.text-color-dark {
-  color: $textPrimaryDark;
-}
-
-.text-color-light {
-  color: $textPrimaryLight;
-}
   
-
-  /* nav-bar style text  */
-
-  .navHomeLight {
-  text-shadow: 0 0 2px $textSecondaryDark;
-  text-decoration: none;
-  transition: .5s ease;
-}
-
-.navHomeDark {
-  text-shadow: 0 0 2px rgb(234, 245, 245);
-   text-decoration: none;
-   transition: .5s ease;
-  
-}
-
-
-
-/* nav-bar route active */
-
-.navTextDark.router-link-exact-active  {
-  color: #FFFF00 !important;
-  -webkit-text-stroke: 0.1px #FFA500 !important; /* Largeur et couleur du contour */
-  font-weight: bold !important;
-}
-
-.navTextLight.router-link-exact-active  {
-  color: white !important;
-  -webkit-text-stroke: 0.1px $textSecondaryLight !important; /* Largeur et couleur du contour */
-  font-weight: bold !important;
-}
-
-
-  /* media query text reponsive */
-
-/* mobile format */
-/*@media (max-width: 576px) {
-  .h1-light, .h1-dark {
-    font-size: 2rem;
-  }
-  .h2-light, .h2-dark {
-    font-size: 1.3rem;
-  }
-
-  .text-contact {
-    font-size: 0.85rem;
-  }
-
-  .text-style, p, li, .nav-link, span {
-    font-size: 1rem;
-  }
-}
-
-/* tablet format*/
-/*@media (min-width: 577px) and (max-width: 991px) {
-  .h1-light, .h1-dark {
-    font-size: 2.5rem;
-  }
-  .h2-light, .h2-dark {
-    font-size: 1.55rem;
-  }
-  .text-style, p, li, span, .text-color-light, .text-color-dark, .nav a {
-    font-size: 1.10rem;
-  }
-
-  .text-contact {
-    font-size: 0.90rem;
-  }
-
-  .nav-link{
-    font-size: 1.10rem;
-  }
-}
-
-/* desktop format */
-/*@media (min-width: 992px) {
-  h1 {
-    font-size: 2.55rem;
-  }
-  h2 {
-    font-size: 1.55rem;  }
-  .text-style, p, span, .text-color-dark, .text-color-light, .nav a{
-    font-size: 1.0rem;
-  }
-
-  .text-contact {
-    font-size: 0.8rem;
-  }
-
-  .nav-link{
-    font-size: 1rem;
-  }
-}*/
-  
-h1 {
-  @include font-size-responsive(1.5rem, 3rem);
-}
-
-p {
-  @include font-size-responsive(1rem, 1.5rem);
-}
-
-span {
-  @include font-size-responsive(1rem, 1.5rem);
-}
