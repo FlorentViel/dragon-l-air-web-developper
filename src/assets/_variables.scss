@@ -49,6 +49,9 @@ $bgDark1 : rgba(0,36,41,1);
 $bgDark2: rgb(26, 39, 39);
 $bgDarkNav : #001214;
 
+$border-radius: 10px;
+$transition-duration : 0.3s;
+
   /* text */
 
   @mixin font-weight-700 {
@@ -135,6 +138,24 @@ $bgDarkNav : #001214;
   $base-padding: 1rem;
   $padding-multiplier: 2;
 
+  @mixin transition($property, $duration: 0.3s, $ease: ease-in-out) {
+    transition: $property $duration $ease;
+  }
+  
+  @mixin border-radius($radius: 8px) {
+    border-radius: $radius;
+  }
+  
+  @mixin box-shadow($color: rgba(0, 0, 0, 0.25)) {
+    box-shadow: 0 4px 4px $color;
+  }
+  
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   // Fonction pour calculer le padding dynamique
 @function dynamic-padding($multiplier) {
   @return $base-padding * $multiplier;
@@ -195,4 +216,14 @@ $container-max-widths: (
   @include media-breakpoint-up(xl) {
     font-size: $max-size;
   }
+}
+
+/* Mixins et Fonctions Sass */
+@mixin transition($property, $duration: 0.3s, $ease: ease-in-out) {
+  transition: $property $duration $ease;
+}
+
+@mixin border($radius: $border-radius, $color: $borderLight) {
+  border: 1px solid $color;
+  border-radius: $radius;
 }

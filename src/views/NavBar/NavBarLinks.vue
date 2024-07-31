@@ -1,6 +1,7 @@
 <template>
   <div class="navBar-links" :class="['navBar-links', theme.isDarkMode ? 'navBar-links-dark' : 'navBar-links-light', { 'open': isMenuOpen }]">
-    <router-link 
+    <div class="links-container">
+      <router-link 
       class="navBar-item" 
       v-for="(navItem, index) in navBar" 
       :key="index" 
@@ -15,6 +16,9 @@
       {{ navItem.title }}
       <span :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="close-navItem">x</span>
     </router-link>
+
+    </div>
+
     <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" v-if="!isMenuOpen" /> 
   </div>
   
@@ -48,9 +52,15 @@ export default {
 .navBar-links {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 80%;
   flex-wrap: wrap;
   transition: max-height 0.3s ease-in-out;
+
+  .links-container {
+    display: flex;
+    align-items: center;
+  }
 
   @media (max-width: 985px) {
     flex-direction: column;

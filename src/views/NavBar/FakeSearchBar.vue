@@ -10,7 +10,8 @@
         </svg>
       </div>
 
-      <span>https://www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
+        <span v-if="currentRouteName !== 'home'">https://www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
+        <span v-else>https://www.thedragonslairwebdeveloper.com</span>
     </div>
 
     <BurgerMenu :theme="theme" @toggle-menu="toggleMenu" />
@@ -39,8 +40,13 @@ export default {
 .fake-search-bar {
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+
+  @media (max-width: 985px) {
+    justify-content: space-between;
+  }
 
   .fake-search-bar-left {
     display: flex;

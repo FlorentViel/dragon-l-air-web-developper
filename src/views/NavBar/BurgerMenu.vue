@@ -56,8 +56,8 @@ export default {
 .burger-menu-vertical {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 30px;
+  gap: 5px;
+  width: 15px;
   height: auto;
   background: transparent;
   border: none;
@@ -65,7 +65,6 @@ export default {
   padding: 0;
   z-index: 10;
   margin: 0 dynamic-padding(1);
-  transform: rotate(90deg);
 
   .burger-menu-span {
     width: 100%;
