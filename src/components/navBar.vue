@@ -8,10 +8,8 @@
   </nav>
 </template>
 
-<script>
-import Logo from '@/views/NavBar/Logo.vue';  
-import NavBarLinks from '@/views/NavBar/NavBarLinks.vue';
-import FakeSearchBar from '@/views/NavBar/FakeSearchBar.vue';
+<script >
+import { Logo, NavBarLinks, FakeSearchBar } from '@/config/views.js';
 
 export default {
   components: {
@@ -50,7 +48,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 /* navBar scss */
 

@@ -18,6 +18,7 @@
         :class="theme.isDarkMode ? 'main-bloc-dark' : 'main-bloc-light'"
         @mousemove="handlecontentEffect"
         @mouseleave="resetcontentEffect"
+        ref="content"
       >
         <h1
           :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'"
@@ -44,26 +45,14 @@
         </p>
         <div class="button-container">
           <div class="animate-text" :style="{ '--delay': '0.13s' }">
-            <router-link :to="{ name: 'aboutMe' }">
-              <button
-                type="button"
-                :class="theme.isDarkMode ? 'btn-dark-mode' : 'btn-light-mode'"
-                class="btn"
-              >
-                À propos de moi
-              </button>
-            </router-link>
+            <Button :to="{ name: 'aboutMe' }" :theme="theme">
+              À propos de moi
+            </Button>
           </div>
           <div class="animate-text" :style="{ '--delay': '0.13s' }">
-            <router-link :to="{ name: 'service' }">
-              <button
-                type="button"
-                :class="theme.isDarkMode ? 'btn-dark-mode' : 'btn-light-mode'"
-                class="btn"
-              >
-                Mes services
-              </button>
-            </router-link>
+            <Button :to="{ name: 'service' }" :theme="theme">
+              Mes services
+            </Button>
           </div>
         </div>
       </div>
@@ -71,70 +60,48 @@
   </section>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import { images } from '@/config/images';
+import Button from '@/views/Button.vue';
 
-export default {
-  props: ['theme', 'selectedSection'],
-  data() {
-    return {
-      images,
-    };
-  },
-  methods: {
-    toggleThemeAndEmit() {
-      this.theme.toggleTheme();
-      this.$emit('toggleTheme');
-    },
-    handlecontentEffect(event) {
-      const content = document.getElementById("content");
-      const containerWidth = content.parentElement.offsetWidth;
-      const contentWidth = (58.333333 / 100) * containerWidth;
-      const degIncrement = 4;
+const props = defineProps(['theme', 'selectedSection']);
+const content = ref(null);
 
-      const getRotateDeg = (input) => {
-        if (input < contentWidth * 0.33) {
-          return `-${degIncrement * 3}deg`;
-        } else if (input >= contentWidth * 0.33 && input < contentWidth * 0.66) {
-          return `-${degIncrement}deg`;
-        } else if (input >= contentWidth * 0.66 && input < contentWidth * 0.5) {
-          return "0deg";
-        } else if (input >= contentWidth * 0.5 && input < contentWidth * 0.33) {
-          return `${degIncrement}deg`;
-        } else {
-          return `${degIncrement * 3}deg`;
-        }
-      };
+const handlecontentEffect = (event) => {
+  const contentWidth = content.value.offsetWidth;
+  const degIncrement = 4;
 
-      const onMouseMove = (event) => {
-        const rotateX = getRotateDeg(event.clientY - content.getBoundingClientRect().top);
-        const rotateY = getRotateDeg(event.clientX - content.getBoundingClientRect().left);
-        content.style.transform = `rotateX(${rotateX}) rotateY(${rotateY})`;
-      };
+  const getRotateDeg = (input) => {
+    if (input < contentWidth * 0.33) {
+      return `-${degIncrement * 3}deg`;
+    } else if (input >= contentWidth * 0.33 && input < contentWidth * 0.66) {
+      return `-${degIncrement}deg`;
+    } else if (input >= contentWidth * 0.66 && input < contentWidth * 0.5) {
+      return "0deg";
+    } else if (input >= contentWidth * 0.5 && input < contentWidth * 0.33) {
+      return `${degIncrement}deg`;
+    } else {
+      return `${degIncrement * 3}deg`;
+    }
+  };
 
-      const onMouseLeave = () => {
-        content.style.transform = `none`;
-      };
-
-      content.addEventListener("mousemove", onMouseMove);
-    },
-
-    resetcontentEffect() {
-      const content = document.getElementById("content");
-      content.style.transform = 'none';
-    },
-  },
-  mounted() {
-    const content = document.getElementById("content");
-    content.addEventListener("mousemove", this.handlecontentEffect);
-    content.addEventListener("mouseleave", this.handlecontentEffect);
-  },
+  const rotateX = getRotateDeg(event.clientY - content.value.getBoundingClientRect().top);
+  const rotateY = getRotateDeg(event.clientX - content.value.getBoundingClientRect().left);
+  content.value.style.transform = `rotateX(${rotateX}) rotateY(${rotateY})`;
 };
+
+const resetcontentEffect = () => {
+  content.value.style.transform = `none`;
+};
+
+onMounted(() => {
+  content.value.addEventListener("mousemove", handlecontentEffect);
+  content.value.addEventListener("mouseleave", resetcontentEffect);
+});
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
-
 /* Animation css */
 .animate-text {
   opacity: 0; /* Set initial opacity to 0 */
@@ -163,10 +130,8 @@ export default {
 
 /* Welcome bloc css */
 #welcome {
-  padding: dynamic-padding(1); // 1rem
+  padding: rem(16); // 1rem
   overflow-x: hidden;
-
-
 }
 
 .welcome-content {
@@ -174,11 +139,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: dynamic-padding(2); // 2rem
+  padding: rem(32); // 2rem
 }
 
 .content-body {
-  gap: dynamic-padding(1.2);
+  gap: rem(19);
   @include flex-column;
 }
 
@@ -193,15 +158,13 @@ export default {
   border-radius: 50%;
   @media (max-width: 768px) {
     width: 250px;
-    margin-bottom: dynamic-padding(2); // 2rem
+    margin-bottom: rem(32); // 2rem
   }
 }
 
-
-
 #content {
   flex: 1 1 60%;
-  padding: dynamic-padding(2);
+  padding: rem(32);
   border-radius: 1.5rem;
   transition: 0.5s;
   position: relative;
@@ -225,25 +188,6 @@ export default {
 .button-container {
   display: flex;
   justify-content: space-evenly;
-  padding-top: dynamic-padding(1); // 1rem
-}
-
-.btn {
-  padding: dynamic-padding(0.5) dynamic-padding(1); // 0.5rem 1rem
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-}
-
-.btn-dark-mode {
-  background-color: $borderDarkGardient;
-  color: $white;
-}
-
-.btn-light-mode {
-  background-color: $borderLightGardient;
-  color: $white;
+  padding-top: rem(16); // 1rem
 }
 </style>

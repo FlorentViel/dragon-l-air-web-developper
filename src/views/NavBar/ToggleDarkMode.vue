@@ -12,21 +12,19 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'ToggleDarkMode',
-    props: ['theme'],
-    methods: {
-      toggleThemeAndEmit() {
-        this.theme.toggleTheme();
-        this.$emit('toggle-theme-request');
-      }
-    }
-  };
+  <script setup>
+  import { defineProps, defineEmits } from 'vue';
+
+  const props = defineProps(['theme']);
+  const emit = defineEmits(['toggle-theme-request']);
+
+  function toggleThemeAndEmit() {
+    props.theme.toggleTheme();
+    emit('toggle-theme-request');
+  }
   </script>
   
   <style lang="scss" scoped>
-  @import '@/assets/_variables.scss';
   
   .theme-toggle {
     display: flex;

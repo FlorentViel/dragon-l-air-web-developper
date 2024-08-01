@@ -19,7 +19,7 @@
 
     </div>
 
-    <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" v-if="!isMenuOpen" /> 
+    <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" /> 
   </div>
   
 </template>
@@ -42,7 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 .burger-menu {    
   align-self: center;

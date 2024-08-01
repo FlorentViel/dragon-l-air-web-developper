@@ -1,0 +1,86 @@
+/* media query */
+
+$base-font-size: 16px; // Assurez-vous que cela correspond à la taille de la police racine
+
+$breakpoints: (
+  xs: rem(300),
+  sm: rem(576),  // 576px / 16px
+  md: rem(768),  // 768px / 16px
+  lg: rem(992),  // 992px / 16px
+  xl: rem(1200),  // 1200px / 16px
+  xxl: rem(1400) // 1400px / 16px
+);
+
+// Variables de largeur de conteneur
+$container-max-widths: (
+  xs: 100%,
+  sm: 90%,  // 576px / 16px
+  md: 80%,  // 768px / 16px
+  lg: 75%,  // 992px / 16px
+  xl: 70%,  // 1200px / 16px
+  xxl: 70% // 1400px / 16px
+);
+
+@mixin media-breakpoint($direction, $name) {
+  $breakpoint: map-get($breakpoints, $name);
+
+  @if $breakpoint {
+    @if $direction == 'up' {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    } @else if $direction == 'down' {
+      @media (max-width: $breakpoint) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin font-size-responsive($min-size, $max-size) {
+  font-size: $min-size;
+
+  @include media-breakpoint('up', 'sm') {
+    font-size: $min-size;
+  }
+
+  @include media-breakpoint('up', 'md') {
+    font-size: calc(#{$min-size} + (#{$max-size} - #{$min-size}) * 0.5);
+  }
+
+  @include media-breakpoint('up', 'lg') {
+    font-size: calc(#{$min-size} + (#{$max-size} - #{$min-size}) * 0.75);
+  }
+
+  @include media-breakpoint('up', 'xl') {
+    font-size: $max-size;
+  }
+}
+
+@mixin responsive-container-max-widths {
+  @each $breakpoint, $max-width in $container-max-widths {
+    @include media-breakpoint('up', $breakpoint) {
+      max-width: $max-width;
+    }
+  }
+}
+
+@mixin responsive-container-min-widths {
+  @each $breakpoint, $min-width in $container-max-widths {
+    @include media-breakpoint('up', $breakpoint) {
+      min-width: $min-width;
+    }
+  }
+}
+
+@mixin media-breakpoint-md-down {
+  @media (max-width: #{map-get($breakpoints, md)}) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-md-up {
+  @media (min-width: #{map-get($breakpoints, md)}) {
+    @content;
+  }
+}

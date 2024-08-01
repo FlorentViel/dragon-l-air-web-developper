@@ -25,62 +25,17 @@
   </section>
 </template>
 
-<script>
-export default {
-  props: ['theme'],
-  methods: {
-    toggleThemeAndEmit() {
-      this.theme.toggleTheme();
-      this.$emit('toggleTheme');
-    },
-    handleCardEffect(event) {
-      const card = document.getElementById("card");
-      const containerWidth = card.parentElement.offsetWidth;
-      const cardWidth = (58.333333 / 100) * containerWidth;
-      const degIncrement = 4;
+<script setup>
+const props = defineProps(['theme']);
 
-      const getRotateDeg = (input) => {
-        if (input < cardWidth * 0.33) {
-          return `-${degIncrement * 3}deg`;
-        } else if (input >= cardWidth * 0.33 && input < cardWidth * 0.66) {
-          return `-${degIncrement}deg`;
-        } else if (input >= cardWidth * 0.66 && input < cardWidth * 0.5) {
-          return "0deg";
-        } else if (input >= cardWidth * 0.5 && input < cardWidth * 0.33) {
-          return `${degIncrement}deg`;
-        } else {
-          return `${degIncrement * 3}deg`;
-        }
-      };
-
-      const onMouseMove = (event) => {
-        const rotateX = getRotateDeg(event.clientY - card.getBoundingClientRect().top);
-        const rotateY = getRotateDeg(event.clientX - card.getBoundingClientRect().left);
-        card.style.transform = `rotateX(${rotateX}) rotateY(${rotateY})`;
-      };
-
-      const onMouseLeave = () => {
-        card.style.transform = `none`;
-      };
-
-      card.addEventListener("mousemove", onMouseMove);
-      card.addEventListener("mouseleave", onMouseLeave);
-    },
-    resetCardEffect() {
-      const card = document.getElementById("card");
-      card.style.transform = `none`;
-    }
-  }
-};
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 .container {
   @include flex-center;
   flex-direction: column;
-  padding: 2rem;
+  padding: rem(32) ;
 }
 
 .blocPresentation {

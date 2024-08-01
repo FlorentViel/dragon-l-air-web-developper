@@ -41,7 +41,6 @@ export default {
 </script>
 
 <style scoped>
-@import '@/assets/_variables.scss';
 
 .carousel {
   position: relative;

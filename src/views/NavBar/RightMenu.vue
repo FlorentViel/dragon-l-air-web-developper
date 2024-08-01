@@ -10,33 +10,35 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { defineProps, defineEmits } from 'vue';
 import ToggleDarkMode from './ToggleDarkMode.vue';
 import BurgerMenu from './BurgerMenu.vue';
 
-export default {
-  components: {
-    ToggleDarkMode,
-    BurgerMenu
-  },
-  props: ['theme', 'isRightMenuOpen', 'backgroundImages', 'selectedBackground'],
-  methods: {
-    toggleRightMenu() {
-      this.$emit('toggle-right-menu');
-    },
-    toggleThemeAndEmit() {
-      this.theme.toggleTheme();
-      this.$emit('toggle-theme-request');
-    },
-    changeBackground(image) {
-      this.$emit('change-background', image);
-    }
-  }
-};
+const props = defineProps({
+  theme: Object,
+  isRightMenuOpen: Boolean,
+  backgroundImages: Array,
+  selectedBackground: String
+});
+
+const emit = defineEmits(['toggle-right-menu', 'toggle-theme-request', 'change-background']);
+
+function toggleRightMenu() {
+  emit('toggle-right-menu');
+}
+
+function toggleThemeAndEmit() {
+  props.theme.toggleTheme();
+  emit('toggle-theme-request');
+}
+
+function changeBackground(image) {
+  emit('change-background', image);
+}
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 .right-menu {
   position: absolute; /* Change from fixed to absolute */

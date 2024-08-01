@@ -12,7 +12,7 @@
         </main>
         <Footer :theme="theme" />
         <RightMenu :theme="theme" :isRightMenuOpen="isRightMenuOpen" :backgroundImages="backgroundImages" :selectedBackground="selectedBackground" @toggle-right-menu="toggleRightMenu" @toggle-theme-request="toggleThemeAndEmit" @change-background="changeBackground" />
-      </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -78,6 +78,11 @@ function changeBackground(image) {
   document.body.style.backgroundImage = `url(${image})`;
 }
 
+function toggleThemeAndEmit() {
+  toggleTheme();
+  // Any additional logic if needed
+}
+
 const route = useRoute();
 
 watch(route, (newRoute) => {
@@ -107,11 +112,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
-
 .main-bloc {
   display: flex;
   justify-content: center;
+  width: 100vw;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -123,16 +127,17 @@ onMounted(() => {
 }
 
 /* main */
-
 /* computer css */
 
 .computer {
-  width: 85%;
-  max-width: 1200px;
+  margin: 0 auto;
+  height: 90%;
   border-radius: 15px;
-  padding: 20px;
+  padding: rem(16);
   position: relative;
   height: max-content;
+  @include responsive-container-max-widths;
+  @include responsive-container-min-widths;
 }
 
 .computer.light-mode {
@@ -234,7 +239,7 @@ footer {
   border: 1px solid rgba(29, 29, 30, 0.833);
 }
 
-@media screen and (max-width: 985px) {
+/*@include media-breakpoint-down(lg) {
   #main-page {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -255,5 +260,5 @@ footer {
   .backgroundImageDark {
     background-color: #121212;
   }
-}
+} */
 </style>

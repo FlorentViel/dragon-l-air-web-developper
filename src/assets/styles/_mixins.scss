@@ -1,0 +1,125 @@
+ /* text */
+
+ @mixin font-weight-700 {
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  @mixin li-list-none {
+    list-style-type: none;
+  }
+
+  /* responsive images */
+  
+  /* flexbox */
+
+  
+  @mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @mixin flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @mixin flex-0-50 {
+    flex: 0 0 50%;
+  }
+
+  @mixin flex-1-50 {
+    flex: 1 1 50%;
+  }
+
+  @mixin flex-1-100 {
+    flex: 1 1 100%;
+  }
+
+  /* margin */
+
+  @mixin margin-5-auto {
+    margin: 5% auto;
+
+  }
+
+  @mixin margin-x($value) {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  @mixin margin-y($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  /* padding */
+
+  $base-padding: 1rem;
+  $padding-multiplier: 2;
+
+  @mixin transition($property, $duration: 0.3s, $ease: ease-in-out) {
+    transition: $property $duration $ease;
+  }
+  
+  @mixin border-radius($radius: 8px) {
+    border-radius: $radius;
+  }
+  
+  @mixin box-shadow($color: rgba(0, 0, 0, 0.25)) {
+    box-shadow: 0 4px 4px $color;
+  }
+  
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Mixins et Fonctions Sass */
+  @mixin transition($property, $duration: 0.3s, $ease: ease-in-out) {
+    transition: $property $duration $ease;
+  }
+  
+  @mixin border($radius: $border-radius, $color: $borderLight) {
+    border: 1px solid $color;
+    border-radius: $radius;
+  }
+
+  @mixin margin-y($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  @mixin margin-x($value) {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  @mixin padding-y($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+
+  @mixin padding-x($value) {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  @mixin input-style($bg-color, $border-color, $text-color) {
+    background: $bg-color;
+    border: 1px solid $border-color;
+    color: $text-color;
+  }
+
+  @mixin placeholder-style($color) {
+    &::placeholder {
+      color: $color;
+    }
+  }

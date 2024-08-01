@@ -25,7 +25,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 .my-5 {
   margin: 3rem 0;

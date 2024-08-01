@@ -42,7 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/_variables.scss';
 
 .container-md {
   @include flex-center;

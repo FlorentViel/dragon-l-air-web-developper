@@ -131,8 +131,7 @@ h1, h2{
   /* p style */
   
   p, label {
-    font-size: 1rem; /* 1rem est généralement équivalent à 16px, mais s'adapte à la taille de la police de base du navigateur */
-    @include font-size-responsive(1rem, 1.5rem);
+    @include font-size-responsive(0.7rem, 1rem);
   }
   
   /* indentation first line */

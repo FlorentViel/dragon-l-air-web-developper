@@ -61,16 +61,12 @@
   height: auto;
 }
 
-@import 'variables'; // Assurez-vous d'importer vos variables
-
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-
-  @include container-max-widths($container-max-widths);
+  @include flex-center;
+  flex-direction: column;
+  padding-right: rem(16);
+  padding-left: rem(16);
+  
 }
 
 .container-fluid {

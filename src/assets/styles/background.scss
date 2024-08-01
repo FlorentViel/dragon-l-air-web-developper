@@ -1,5 +1,4 @@
 /* style background et style bloc - btn  */
-@import '@/assets/_variables.scss';
 
 /* background css */
 
@@ -15,8 +14,12 @@ body {
 
 
 
+#main{
+  @include flex-center;
+  @include flex-column;
+  min-height: 100vh;
 
-  /*aboutme blocbackground */
+}
 
 
 
