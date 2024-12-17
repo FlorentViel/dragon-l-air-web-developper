@@ -1,0 +1,38 @@
+
+
+.toggle-button {
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: inherit;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+
+
+    &.dark {
+        background: #a1a1a115;
+        &:hover {
+          background: #281eb3b2;
+        }
+     }
+
+     &.light {
+       background: #b6b6b61a;
+       &:hover {
+         background: #c69fd8db;
+       }
+      }
+  
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+.icon-dark {
+  color: $textPrimaryDark;
+}
+
+.icon-light {
+  color: $textPrimaryLight;
+}

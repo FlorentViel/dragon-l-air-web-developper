@@ -3,8 +3,6 @@
 /* background css */
 
 body {
-  @include flex-center;
-  @include flex-column;
   width: 100vw;
   height: 100svh;
   background-repeat: no-repeat;
@@ -18,7 +16,6 @@ body {
   @include flex-center;
   @include flex-column;
   min-height: 100vh;
-
 }
 
 
@@ -156,11 +153,7 @@ body {
   max-width: 100%;
 }
 
-.card-carousel {
-  visibility: hidden;
-  transition: transform 0.5s ease-in-out, visibility 0.5s, opacity 0.5s;
 
-}
 
 .card-light {
   background-color: var(--bglight2);

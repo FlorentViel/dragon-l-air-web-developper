@@ -6,20 +6,18 @@
   </button>
 </template>
 
-<script>
-export default {
-  props: ['theme', 'isVertical'],
-  methods: {
-    toggleMenu() {
-      this.$emit('toggle-menu');
-    }
-  }
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps(['theme', 'isVertical']);
+const emit = defineEmits(['toggle-menu']);
+
+const toggleMenu = () => {
+  emit('toggle-menu');
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 .burger-menu {
   display: none;
   flex-direction: column;
@@ -77,6 +75,20 @@ export default {
     &.burger-light {
       background-color: $textPrimaryLight;
     }
+  }
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 

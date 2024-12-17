@@ -19,18 +19,25 @@
 
     </div>
 
-    <BurgerMenu :theme="theme" :isVertical="true" @toggle-menu="toggleRightMenu" /> 
-  </div>
+    <button @click="toggleRightMenu" class="toggle-button" :class="theme.isDarkMode ? 'dark' : 'light'">
+      <font-awesome-icon :icon="['fas', 'arrow-left']" :class="theme.isDarkMode ? 'icon-dark' : 'icon-light'" />
+  </button>  
+</div>
   
 </template>
 
 <script>
 import BurgerMenu from './BurgerMenu.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faArrowLeft, faArrowRight);
 
 export default {
   components: {
-    BurgerMenu
+    BurgerMenu,
+    FontAwesomeIcon
   },
   props: ['theme', 'navBar', 'isMenuOpen', 'isRightMenuOpen'],
   methods: {
@@ -42,6 +49,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@import '../../assets/styles/navBar.scss';
+
 
 .burger-menu {    
   align-self: center;
@@ -118,5 +128,11 @@ export default {
     transition: border-bottom 0.3s ease-in-out;
     margin-bottom: -1px;
   }
+}
+
+.toggle-button {
+  margin-left: auto;
+  margin-right: rem(32);
+
 }
 </style>

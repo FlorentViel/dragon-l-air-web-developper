@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import '@fortawesome/fontawesome-free/css/all.css';
-import welcome from '../components/welcome.vue'
-import aboutMe from '../components/aboutMe.vue'
-import service from '../components/service.vue'
-import projet from '../components/projet.vue'
-import contact from '../components/contact.vue'
-import privacyPolicy from '../components/privacyPolicy.vue'
+import welcome from '../views/welcome.vue'
+import aboutMe from '../views/aboutMe.vue'
+import service from '../views/service.vue'
+import projet from '../views/projet.vue'
+import contact from '../views/contact.vue'
+import privacyPolicy from '../views/privacyPolicy.vue'
 
 
 const router = createRouter({

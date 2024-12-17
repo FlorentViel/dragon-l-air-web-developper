@@ -1,5 +1,7 @@
 <template>
+  <ContactTopBar :theme="theme" />
   <div id="#main-page" class="main-bloc">
+
     <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="computer">
       <div :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="screen">
         <NavBar :theme="theme" :selectedSection="selectedSection" @toggle-theme-request="toggleTheme" @toggle-right-menu="toggleRightMenu" />
@@ -20,9 +22,10 @@
 <script setup>
 import { ref, reactive, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import NavBar from '@/components/navBar.vue';
-import Footer from '@/components/footer.vue';
-import RightMenu from '@/views/NavBar/RightMenu.vue';
+import ContactTopBar from '@/views/contact-top-bar.vue';
+import NavBar from '@/views/navBar.vue';
+import Footer from '@/views/footer.vue';
+import RightMenu from '@/components/NavBar/RightMenu.vue';
 import { images } from '@/config/images';
 
 // Homepage
@@ -115,6 +118,7 @@ onMounted(() => {
 .main-bloc {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100vw;
 }
 
@@ -207,6 +211,7 @@ onMounted(() => {
 
 #app {
   display: flex;
+  gap: rem(32);
   flex-direction: column;
   max-height: 100vh;
   max-width: 100%;

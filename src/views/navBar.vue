@@ -8,42 +8,33 @@
   </nav>
 </template>
 
-<script >
-import { Logo, NavBarLinks, FakeSearchBar } from '@/config/views.js';
+<script setup>
+import { ref, computed, defineProps, defineEmits } from 'vue';
+import { useRoute } from 'vue-router';
+import { Logo, NavBarLinks, FakeSearchBar } from '@/config/components.js';
 
-export default {
-  components: {
-    Logo,
-    NavBarLinks,
-    FakeSearchBar
-  },
-  data() {
-    return {
-      activenavItem: 0,
-      navBar: [
-        { title: 'Accueil', route: 'home' },
-        { title: '\u00C0 propos', route: 'aboutMe' },
-        { title: 'Mes service', route: 'service' },
-        { title: 'Mes projets', route: 'projet' },
-        { title: 'Contact', route: 'contact' },
-      ],
-      isMenuOpen: false, // État pour le menu burger
-    };
-  },
-  props: ['theme'],
-  computed: {
-    currentRouteName() {
-      return this.$route.name;
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    toggleRightMenu() {
-      this.$emit('toggle-right-menu');
-    }
-  }
+const props = defineProps(['theme']);
+const emit = defineEmits(['toggle-right-menu']);
+
+const activenavItem = ref(0);
+const navBar = ref([
+  { title: 'Accueil', route: 'home' },
+  { title: '\u00C0 propos', route: 'aboutMe' },
+  { title: 'Mes service', route: 'service' },
+  { title: 'Mes projets', route: 'projet' },
+  { title: 'Contact', route: 'contact' },
+]);
+const isMenuOpen = ref(false);
+
+const route = useRoute();
+const currentRouteName = computed(() => route.name);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const toggleRightMenu = () => {
+  emit('toggle-right-menu');
 };
 </script>
 
@@ -59,7 +50,6 @@ export default {
   flex-direction: column;
   align-items: center;
   margin: 0;
-  gap: 10px;
 
   &.light-mode {
     background-color: $bgLight1;

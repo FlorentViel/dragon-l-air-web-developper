@@ -37,12 +37,23 @@ export default {
   bottom: 0;
   background-size: 100vw;
   position: relative;
-  padding: dynamic-padding(1);
+  padding: rem(16);
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  transition: background-color 0.3s ease;
+
+  &.nav-dark {
+    background-color: $bgDark1;
+  }
+
+  &.nav-light {
+    background-color: $bgLight1;
+  }
 }
+
+
 
 
 </style>

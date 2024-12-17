@@ -25,14 +25,14 @@
           class="content-title animate-text title"
           :style="{ '--delay': '0.5s' }"
         >
-          Dragon's lair
+          Dragon's Lair
         </h1>
         <h1
           :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'"
           class="content-title animate-text"
           :style="{ '--delay': '0.7s' }"
         >
-          Développeur web et web
+          Web Developper
         </h1>
         <p
           :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'"
@@ -63,7 +63,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { images } from '@/config/images';
-import Button from '@/views/Button.vue';
+import Button from '@/components/Button.vue';
 
 const props = defineProps(['theme', 'selectedSection']);
 const content = ref(null);

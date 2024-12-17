@@ -9,33 +9,39 @@
         <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
         </svg>
       </div>
-      <div class="fake-search-bar-text-block">
-        <span v-if="currentRouteName !== 'home'">https://www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
-        <span v-else>https://www.thedragonslairwebdeveloper.com</span>
+      <div class="flex-wrap">
+        <div class="fake-search-bar-text-block">
+        <span v-if="currentRouteName !== 'home'">www.thedragonslairwebdeveloper.com/{{ currentRouteName }}</span>
+        <span v-else>www.thedragonslairwebdeveloper.com</span>
       </div>
+      <BurgerMenu :theme="theme" :isVertical="false" @toggle-menu="toggleMenu" />
+
     </div>
 
-    <BurgerMenu :theme="theme" @toggle-menu="toggleMenu" />
+      </div>
+
+
   </div>
 </template>
 
-<script>
-import BurgerMenu from '@/views/NavBar/BurgerMenu.vue';
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+import BurgerMenu from '@/components/NavBar/BurgerMenu.vue';
 
-export default {
-  components: {
-    BurgerMenu
-  },
-  props: ['theme', 'currentRouteName', 'isRightMenuOpen'],
-  methods: {
-    toggleMenu() {
-      this.$emit('toggle-menu');
-    },
-  }
+const props = defineProps(['theme', 'currentRouteName', 'isRightMenuOpen']);
+const emit = defineEmits(['toggle-menu', 'toggle-right-menu']);
+
+const toggleMenu = () => {
+  emit('toggle-menu');
+};
+
+const toggleRightMenu = () => {
+  emit('toggle-right-menu');
 };
 </script>
 
 <style lang="scss" scoped>
+
 
 .fake-search-bar {
 
@@ -53,15 +59,16 @@ export default {
     display: flex;
     align-items: center;
     gap: rem(10);
+    @include font-size-responsive(0.65rem, 1rem);
   }
 
   .cadenas-icon {
     display: flex;
     align-items: center;
-    margin-right: dynamic-padding(1.5);
-    margin-left: dynamic-padding(1);
-    width: 20px;
-    height: 20px;
+    margin-right: rem(24);
+    margin-left: rem(16);
+    width: rem(20);
+    height: rem(20);
 
     @include media-breakpoint(down, md) {
       width: 15px;
@@ -73,6 +80,7 @@ export default {
       height: 13px;
     }
   }
+
 
   .fake-search-bar-text-block {
     display: flex;
@@ -100,4 +108,27 @@ export default {
     }
   }
   
-}</style>
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  .icon-dark {
+    color: $textPrimaryDark;
+  }
+
+  .icon-light {
+    color: $textPrimaryLight;
+  }
+}
+</style>

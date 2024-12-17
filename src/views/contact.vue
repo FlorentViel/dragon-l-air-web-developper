@@ -70,7 +70,14 @@
             <label for="first-name">Téléphone</label>
             <input type="text" class="form-control" name="phone" placeholder="Sélectionnez votre numéro de téléphone">
           </div>
-          
+        </div>
+        <div class="form-group">
+          <label for="object">Objet</label>
+          <input type="text" class="form-control" name="object" placeholder="Saisissez l'objet de votre message">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea class="form-control" name="message" rows="3" placeholder="Saisissez votre message"></textarea>
         </div>
       </form>
     </div>
@@ -110,25 +117,30 @@ export default {
   /* background bloc Contact */
   #formbg {
     border-radius: 60px;
+    width: 95%;
+    padding: rem(16);
   }
 
   #contact {
-    width: 100%;
+    width: 50%;
+    flex: 1;
     & input:not([type='checkbox']), & textarea, & .input-group-text {
       padding: rem(10);
       font-size: rem(16);
     }
 
     &.dark input:not([type='checkbox']), &.dark textarea, &.dark .input-group-text {
-      background: $bgDark1; 
       border: 1px solid $StartDarkGradient;
       color: $white;
     }
 
     &.light input:not([type='checkbox']), &.light textarea, &.light .input-group-text {
-      background: $bgLight3;
       border: 1px solid $StartLightGradient;
       color: $black;
+    }
+
+    .form-control {
+      width: 100%;
     }
 
     &.dark .form-control::placeholder, .input-group-text {
@@ -141,7 +153,11 @@ export default {
   }
 
   #social {
-    width: auto;
+    width: 45%;
+  }
+
+  .form-group {
+    max-width: 100%;
   }
 
   .control {
@@ -321,14 +337,16 @@ export default {
 
   /* error input message style */
   .error-message {
-    position: absolute;
-    color: $white;
-    font-size: 13px;
-    right: 0px;
-    bottom: 20px;
-    background-color: red;
-    padding: 0.5rem;
-    border-radius: 15px !important;
+    @include media-breakpoint('up', 'md') {
+      position: absolute;
+      color: $black;
+      font-size: rem(0.875);
+      right: 0;
+      bottom: rem(20);
+      background-color: red;
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
   }
 
   .container {
@@ -393,12 +411,14 @@ export default {
   }
 
   .form-row {
-    @include flex-center;
+    display: flex;
+    justify-content: space-between;
     gap: rem(12);
   }
 
   .form-group {
     @include flex-column;
+    width: 100%;
     @include margin-y(rem(24));
   }
 
@@ -412,16 +432,5 @@ export default {
 
   .input-group-text {
     @include padding-x(rem(16));
-  }
-
-  .error-message {
-    position: absolute;
-    color: $black;
-    @include font-size-responsive(0.875rem, 1rem);
-    right: 0;
-    bottom: rem(20);
-    background-color: red;
-    padding: 0.5rem;
-    border-radius: 10px;
   }
 </style>
