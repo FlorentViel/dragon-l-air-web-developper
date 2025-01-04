@@ -20,6 +20,13 @@
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">Je développe des boutiques en ligne sécurisées et intuitives, intégrant des fonctionnalités avancées pour une expérience d'achat fluide et agréable.</p>
           </div>                
         </div>
+        <div class="service-card">
+          <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/logos/logo-site/technologie.png" class="card-image" alt="Maintenance et support">
+          <div class="card-body">
+            <h3 :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'" class="card-title">Référencement naturel</h3>
+            <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">Je optimise vos sites web pour les moteurs de recherche, en utilisant des techniques de référencement naturel (SEO) avancées, pour augmenter leur visibilité et leur trafic organique.</p>
+          </div>                
+        </div>
         <div class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
           <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/logos/logo-site/technologie.png" class="card-image" alt="Maintenance et support">
           <div class="card-body">
@@ -27,6 +34,7 @@
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">J'offre des services de maintenance continue et de support technique pour garantir la performance et la sécurité de votre site web à long terme.</p>
           </div>                
         </div>
+        
       </div>
     </div>
   </section>
@@ -38,45 +46,59 @@ defineProps(['theme', 'changeSection']);
 
 <style lang="scss" scoped>
 @import '@/assets/styles/_utils.scss';
+@import '@/assets/styles/_functions.scss';
+@import '@/assets/styles/_variables.scss';
+@import '@/assets/styles/_global-text.scss';
+@import '@/assets/styles/_media-queries.scss';
+
+#service {
+  margin-bottom: rem(100);
+  margin-top: rem(10);
+}
 
 .service-container {
   @include flex-center;
-  flex-direction: column;
+  @include flex-direction(column);
   @include padding-x(rem(32));
 }
 
 .service-title {
   @include margin-y(rem(24));
+  @include font-size-responsive(2rem, 3rem);
+  text-align: center;
 }
 
 .service-content {
   @include flex-center;
-  flex-direction: column;
+  @include flex-direction(column);
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: rem(32);
 }
 
 .service-description {
   text-align: center;
   max-width: 800px;
   @include margin-y(rem(24));
+  @include font-size-responsive(0.7rem, 1rem);
 }
 
 .service-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: rem(24);
+  gap: rem(32);
+  padding: rem(32);
 }
 
 .service-card {
-  flex: 1 1 calc(33.333% - rem(24));
+  flex: 1 1 calc(33.333% - rem(32));
   min-width: 250px;
   max-width: 350px;
   @include border-radius($border-radius);
   @include box-shadow();
-  padding: rem(16);
+  padding: rem(24);
   transition: transform $transition-duration ease-in-out;
 
   &:hover {
@@ -86,7 +108,10 @@ defineProps(['theme', 'changeSection']);
 
 .card-image {
   width: 100%;
-  height: auto;
+  height: 200px;
+  border: 1px solid rgba(60, 56, 56, 0.348);
+  padding: rem(16);
+  object-fit: cover;
   @include border-radius($border-radius);
 }
 

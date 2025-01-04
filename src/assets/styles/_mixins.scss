@@ -82,6 +82,10 @@
     justify-content: center;
     align-items: center;
   }
+
+  @mixin flex-direction($direction) {
+    flex-direction: $direction;
+  }
   /* Mixins et Fonctions Sass */
   @mixin transition($property, $duration: 0.3s, $ease: ease-in-out) {
     transition: $property $duration $ease;
