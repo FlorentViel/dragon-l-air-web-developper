@@ -14,7 +14,17 @@
             </div>
             <section class="about-me-content">
               <article class="accordion-item" @click="toggleAccordion(0)" :class="{ active: activeIndex === 0 }">
-                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">Qui suis-je ?</h3>
+                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">
+                  Qui suis-je ?
+                  <font-awesome-icon 
+                    :icon="['fas', 'arrow-down']" 
+                    :class="[
+                      theme.isDarkMode ? 'icon-dark' : 'icon-light',
+                      { 'rotate': activeIndex === 0 }
+                    ]" 
+                    class="accordion-icon"
+                  />
+                </h3>
                 <div class="accordion-content" :style="accordionStyle(0)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
                     Je suis un développeur web freelance qui commence son activité. 
@@ -26,7 +36,17 @@
               </article>
 
               <article class="accordion-item" @click="toggleAccordion(1)" :class="{ active: activeIndex === 1 }">
-                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">Mon parcours professionnel</h3>
+                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">
+                  Mon parcours professionnel
+                  <font-awesome-icon 
+                    :icon="['fas', 'arrow-down']" 
+                    :class="[
+                      theme.isDarkMode ? 'icon-dark' : 'icon-light',
+                      { 'rotate': activeIndex === 1 }
+                    ]" 
+                    class="accordion-icon"
+                  />
+                </h3>
                 <div class="accordion-content" :style="accordionStyle(1)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
                     J'ai développé des sites web pour des entreprises, entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
@@ -39,7 +59,17 @@
               </article>
 
               <article class="accordion-item" @click="toggleAccordion(2)" :class="{ active: activeIndex === 2 }">
-                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">Mes compétences</h3>
+                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">
+                  Mes compétences
+                  <font-awesome-icon 
+                    :icon="['fas', 'arrow-down']" 
+                    :class="[
+                      theme.isDarkMode ? 'icon-dark' : 'icon-light',
+                      { 'rotate': activeIndex === 2 }
+                    ]" 
+                    class="accordion-icon"
+                  />
+                </h3>
                 <div class="accordion-content" :style="accordionStyle(2)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
                     Je suis d'un naturel calme, à l'écoute et curieux et je m'oriente vers le développement de site pour les entreprises,
@@ -135,6 +165,9 @@ const accordionStyle = (index) => {
   position: relative;
   transition: all $transition-duration ease-in-out;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &:hover {
     background-color: rgba($StartLightGradient, 0.1);
@@ -160,5 +193,13 @@ const accordionStyle = (index) => {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
 </style>

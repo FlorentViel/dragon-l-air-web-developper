@@ -16,11 +16,6 @@
 import { ref, watch } from 'vue';
 import { defineProps, defineEmits } from 'vue';
 import ToggleDarkMode from './ToggleDarkMode.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faArrowLeft, faArrowRight);
 
 const props = defineProps({
   theme: Object,

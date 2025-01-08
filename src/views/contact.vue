@@ -79,6 +79,29 @@
           <label for="message">Message</label>
           <textarea class="form-control" name="message" rows="3" placeholder="Saisissez votre message"></textarea>
         </div>
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input 
+              type="checkbox" 
+              v-model="acceptPolicy"
+              required
+            >
+            <span :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'">
+              J'accepte la <router-link to="/privacyPolicy">politique de confidentialité</router-link>
+            </span>
+          </label>
+        </div>
+        <button 
+          type="submit" 
+          class="submit-button container-fluid"
+          :class="[
+            theme.isDarkMode ? 'backgroundDark' : 'backgroundLight',
+            { 'disabled': !acceptPolicy }
+          ]"
+          :disabled="!acceptPolicy"
+        >
+          Envoyer
+        </button>
       </form>
     </div>
   </section>
@@ -89,13 +112,71 @@ export default {
   props: ['theme'],
   data() {
     return {
-      errors: {}
+      errors: {},
+      acceptPolicy: false,
+      formData: {
+        lastName: '',
+        firstName: '',
+        email: '',
+        phone: '',
+        object: '',
+        message: ''
+      }
     };
   },
   methods: {
-    validateAndSubmit(event) {
+    async validateAndSubmit(event) {
       event.preventDefault();
-      // Validation logic here
+      
+      if (!this.acceptPolicy) {
+        alert("Veuillez accepter la politique de confidentialité");
+        return;
+      }
+
+      // Récupération des données du formulaire
+      const form = event.target;
+      this.formData = {
+        lastName: form.lastName.value,
+        firstName: form.firstName.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        object: form.object.value,
+        message: form.message.value
+      };
+
+      // Validation basique
+      if (!this.formData.lastName) {
+        this.errors.lastName = "Le nom est requis";
+        return;
+      }
+      if (!this.formData.email) {
+        this.errors.email = "L'email est requis";
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.formData)
+        });
+
+        const data = await response.json(); // Récupérer la réponse JSON
+
+        if (response.ok) {
+          alert('Message envoyé avec succès!');
+          form.reset();
+          this.acceptPolicy = false;
+          this.errors = {};
+        } else {
+          throw new Error(data.details || 'Erreur lors de l\'envoi');
+        }
+      } catch (error) {
+        console.error('Erreur détaillée:', error);
+        alert(`Une erreur est survenue: ${error.message}`);
+      }
     }
   }
 };
@@ -432,5 +513,64 @@ export default {
 
   .input-group-text {
     @include padding-x(rem(16));
+  }
+
+  .checkbox-group {
+    margin: rem(16) 0;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      width: rem(20);
+      height: rem(20);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+
+  .submit-button {
+    width: 100%;
+    max-width: rem(200);
+    padding: rem(12) rem(24);
+    font-size: rem(16);
+    border: none;
+    font-family: $font-family;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: all $transition-duration ease;
+    margin: rem(16) auto;
+    display: block;
+
+    &.backgroundLight {
+      color: $black;
+      border: 1px solid $StartLightGradient;
+
+      &:hover:not(:disabled) {
+        background: $StartLightGradient;
+        color: $white;
+      }
+    }
+
+    &.backgroundDark {
+      color: $white;
+      border: 1px solid $StartDarkGradient;
+
+      &:hover:not(:disabled) {
+        background: $StartDarkGradient;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 </style>

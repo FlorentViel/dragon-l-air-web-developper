@@ -130,16 +130,15 @@ onMounted(() => {
 
 /* Welcome bloc css */
 #welcome {
-  padding: rem(16); // 1rem
+  padding: rem(64);
   overflow-x: hidden;
 }
 
 .welcome-content {
   @include flex-row;
-  justify-content: space-between;
+  gap: rem(64);
   align-items: center;
   position: relative;
-  padding: rem(32); // 2rem
 }
 
 .content-body {

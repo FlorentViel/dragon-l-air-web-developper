@@ -1,13 +1,24 @@
 import '@/assets/styles/main.scss'
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { createApp } from 'vue';
-import { createStore } from 'vuex'; // Import createStore from vuex
+import { createStore } from 'vuex';
 import App from './App.vue';
 import router from './router';
+import gtag from './plugins/gtag';
 
+// Configuration Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faArrowLeft, faArrowRight, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
+// Ajout des icônes à la bibliothèque
+library.add(faArrowLeft, faArrowRight, faArrowDown);
+
+const app = createApp(App);
+
+// Enregistrement global du composant Font Awesome
+app.component('font-awesome-icon', FontAwesomeIcon);
 
 // Créez votre store
 const store = createStore({
@@ -21,10 +32,8 @@ const store = createStore({
     }
 })
 
-const app = createApp(App);
-
-
 app.use(router);
 app.use(store); // Utilisez votre store
+app.use(gtag);  // Ajoute Google Analytics
 
 app.mount('#app');

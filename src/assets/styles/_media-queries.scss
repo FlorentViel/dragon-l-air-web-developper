@@ -14,11 +14,11 @@ $breakpoints: (
 // Variables de largeur de conteneur
 $container-max-widths: (
   xs: 100%,
-  sm: 90%,  // 576px / 16px
-  md: 80%,  // 768px / 16px
-  lg: 75%,  // 992px / 16px
-  xl: 70%,  // 1200px / 16px
-  xxl: 70% // 1400px / 16px
+  sm: 95%,  // 576px / 16px
+  md: 85%,  // 768px / 16px
+  lg: 80%,  // 992px / 16px
+  xl: 75%,  // 1200px / 16px
+  xxl: 75% // 1400px / 16px
 );
 
 @mixin media-breakpoint($direction, $name) {
