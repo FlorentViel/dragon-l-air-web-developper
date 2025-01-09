@@ -551,7 +551,7 @@ export default {
 
     &.backgroundLight {
       color: $black;
-      border: 1px solid $StartLightGradient;
+      border: 1px solid $EndLightGradient;
 
       &:hover:not(:disabled) {
         background: $StartLightGradient;

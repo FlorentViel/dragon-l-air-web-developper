@@ -5,7 +5,7 @@ import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import App from './App.vue';
 import router from './router';
-import gtag from './plugins/gtag';
+import siteMetrics from './plugins/site-metrics';
 
 // Configuration Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -33,7 +33,7 @@ const store = createStore({
 })
 
 app.use(router);
-app.use(store); // Utilisez votre store
-app.use(gtag);  // Ajoute Google Analytics
+app.use(store);
+app.use(siteMetrics, router);
 
 app.mount('#app');
