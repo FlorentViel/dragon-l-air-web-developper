@@ -7,6 +7,7 @@ import projet from '../views/projet.vue'
 import contact from '../views/contact.vue'
 import privacyPolicy from '../views/privacyPolicy.vue'
 import PrivacyPolicy from '@/views/privacyPolicy.vue'
+import ServiceDetail from '@/views/service_detail.vue'
 
 
 const router = createRouter({
@@ -48,6 +49,12 @@ const router = createRouter({
       path: '/privacy-policy',
       name: 'privacy-policy',
       component: PrivacyPolicy
+    },
+    {
+      path: '/service/:id',
+      name: 'ServiceDetail',
+      component: ServiceDetail,
+      props: true
     }
   ]
 });

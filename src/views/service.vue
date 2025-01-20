@@ -6,35 +6,37 @@
         En tant que développeur web passionné, je propose une gamme complète de services pour répondre à vos besoins numériques. De la conception de sites vitrines élégants à la création de boutiques en ligne performantes, je m'engage à fournir des solutions sur mesure qui reflètent votre vision et atteignent vos objectifs commerciaux.
       </p>
       <div class="service-cards">
-        <div class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
+        <router-link :to="{ name: 'ServiceDetail', params: { id: 'site-vitrine' }}" class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
           <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/pictures/site_vitrine.png" class="card-image" alt="Site internet">
           <div class="card-body">
             <h3 :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'" class="card-title">Création de site internet</h3>
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">Je conçois des sites web modernes, responsives et optimisés pour tous les appareils, en mettant l'accent sur l'expérience utilisateur et le design attractif.</p>
           </div>                
-        </div>
-        <div class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
+        </router-link>
+
+        <router-link :to="{ name: 'ServiceDetail', params: { id: 'e-commerce' }}" class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
           <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/logos/logo-site/technologie.png" class="card-image" alt="Site E-commerce">
           <div class="card-body">
             <h3 :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'" class="card-title">Site E-commerce</h3>
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">Je développe des boutiques en ligne sécurisées et intuitives, intégrant des fonctionnalités avancées pour une expérience d'achat fluide et agréable.</p>
           </div>                
-        </div>
-        <div class="service-card">
+        </router-link>
+
+        <router-link :to="{ name: 'ServiceDetail', params: { id: 'referencement' }}" class="service-card">
           <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/logos/logo-site/technologie.png" class="card-image" alt="Maintenance et support">
           <div class="card-body">
             <h3 :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'" class="card-title">Référencement naturel</h3>
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">Je optimise vos sites web pour les moteurs de recherche, en utilisant des techniques de référencement naturel (SEO) avancées, pour augmenter leur visibilité et leur trafic organique.</p>
           </div>                
-        </div>
-        <div class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
+        </router-link>
+
+        <router-link :to="{ name: 'ServiceDetail', params: { id: 'maintenance' }}" class="service-card" :class="theme.isDarkMode ? 'card-style-dark' : 'card-style-light'">
           <img :class="theme.isDarkMode ? 'img-size-dark' : 'img-size-light'" src="./../assets/images/logos/logo-site/technologie.png" class="card-image" alt="Maintenance et support">
           <div class="card-body">
             <h3 :class="theme.isDarkMode ? 'h2-dark' : 'h2-light'" class="card-title">Maintenance et support</h3>
             <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="card-text">J'offre des services de maintenance continue et de support technique pour garantir la performance et la sécurité de votre site web à long terme.</p>
           </div>                
-        </div>
-        
+        </router-link>
       </div>
     </div>
   </section>
