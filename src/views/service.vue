@@ -1,7 +1,10 @@
 <template>
   <section id="service" key="service" class="service-container">
-    <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'" class="service-title">Mes services</h1>
     <div class="service-content" :class="theme.isDarkMode ? 'main-bloc-dark' : 'main-bloc-light'">
+
+      <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'" class="service-title">Mes services</h1>
+
+
       <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="service-description">
         En tant que développeur web passionné, je propose une gamme complète de services pour répondre à vos besoins numériques. De la conception de sites vitrines élégants à la création de boutiques en ligne performantes, je m'engage à fournir des solutions sur mesure qui reflètent votre vision et atteignent vos objectifs commerciaux.
       </p>
@@ -38,6 +41,9 @@
           </div>                
         </router-link>
       </div>
+
+      <div><h2>Ma façon de travailler</h2></div>
+
     </div>
   </section>
 </template>

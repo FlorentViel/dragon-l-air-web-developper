@@ -23,21 +23,17 @@ body {
   .main-bloc-light{
     background: $bgLight2;
     box-shadow: 0 8px 32px 0 rgba( 3, 38, 135, 0.37 );
-    border: 10px solid $StartLightGradient;
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px;
     transition: all 0.5s ease-in-out;
     
   }
   
   .main-bloc-dark {
     background: $bgDark2;
-    border: 10px solid $borderDark;
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px;
     transition: all 0.5s ease-in-out;
   }
 

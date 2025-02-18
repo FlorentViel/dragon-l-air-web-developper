@@ -121,7 +121,7 @@ const accordionStyle = (index) => {
 }
 
 .h1-dark, .h1-light {
-  padding-bottom: rem(16) ;
+  padding-bottom: rem(42) ;
 }
 
 .blocPresentation {
