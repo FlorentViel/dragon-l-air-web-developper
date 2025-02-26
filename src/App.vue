@@ -27,6 +27,7 @@ import NavBar from '@/views/navBar.vue';
 import Footer from '@/views/footer.vue';
 import RightMenu from '@/components/NavBar/RightMenu.vue';
 import { images } from '@/config/images';
+import logoPath from '@/assets/images/logos/logo-site/logo-dragonslair.png';
 
 // Homepage
 
@@ -111,6 +112,16 @@ onMounted(() => {
     selectedBackground.value = images.dayBackground;
   }
   document.body.style.backgroundImage = `url(${selectedBackground.value})`;
+
+  const link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    const newLink = document.createElement('link');
+    newLink.rel = 'icon';
+    newLink.href = logoPath;
+    document.head.appendChild(newLink);
+  } else {
+    link.href = logoPath;
+  }
 });
 </script>
 
