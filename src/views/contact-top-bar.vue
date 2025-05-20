@@ -7,7 +7,7 @@
     <div class="to-contact">
       <div class="centered">
         <font-awesome-icon :icon="['fas', 'phone']" />
-        <p>+33 6 12 34 56 78</p>
+        <p>06 48 74 42 30</p>
       </div>
       <div class="to-contact-icon">
         <i class="fa-solid fa-envelope"></i>

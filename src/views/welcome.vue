@@ -62,11 +62,43 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useHead } from '@vueuse/head';
 import { images } from '@/config/images';
 import Button from '@/components/Button.vue';
 
 const props = defineProps(['theme', 'selectedSection']);
 const content = ref(null);
+
+// Configuration SEO avec useHead
+useHead({
+  title: "Dragon's Lair Web Developer - Portfolio Florent VIEVILLE",
+  meta: [
+    {
+      name: 'description',
+      content: 'Développeur web freelance spécialisé dans la création de sites web sur mesure, e-commerce et référencement naturel. Expert Vue.js basé en France.'
+    },
+    {
+      name: 'keywords',
+      content: 'développeur web, freelance, création site internet, e-commerce, SEO, Vue.js, développement web'
+    },
+    {
+      property: 'og:title',
+      content: "Dragon's Lair Web Developer - Portfolio Florent VIEVILLE"
+    },
+    {
+      property: 'og:description',
+      content: 'Développeur web freelance spécialisé dans la création de sites web sur mesure, e-commerce et référencement naturel.'
+    },
+    {
+      property: 'og:type',
+      content: 'website'
+    },
+    {
+      property: 'og:url',
+      content: 'https://www.thedragonslairwebdeveloper.com'
+    }
+  ]
+});
 
 const handlecontentEffect = (event) => {
   const contentWidth = content.value.offsetWidth;

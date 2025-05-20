@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import { createApp } from 'vue';
 import { createStore } from 'vuex';
+import { createHead } from '@vueuse/head';
 import App from './App.vue';
 import router from './router';
 import siteMetrics from './plugins/site-metrics';
@@ -16,6 +17,7 @@ import { faArrowLeft, faArrowRight, faArrowDown } from '@fortawesome/free-solid-
 library.add(faArrowLeft, faArrowRight, faArrowDown);
 
 const app = createApp(App);
+const head = createHead();
 
 // Enregistrement global du composant Font Awesome
 app.component('font-awesome-icon', FontAwesomeIcon);
@@ -35,5 +37,6 @@ const store = createStore({
 app.use(router);
 app.use(store);
 app.use(siteMetrics, router);
+app.use(head);
 
 app.mount('#app');
