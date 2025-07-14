@@ -1,55 +1,132 @@
 $white: #ffffff;
 $black: #000000;
 
+// --- Couleurs charte graphique jour ---
+$azure: #E7F9FF; // Fond principal
+$ghostWhite: #FAFAFF; // Fond secondaire
+$lightCyan: #DFF9FF; // Button
+$vividSkyBlue: #4ACCEA; // Button survol, titre secondaire, lien
+$mediumSlateBlue: #746CF7; // Bordure, titre principal
+$vistaBlue: #9BAAFF; // Lien au survol
 
-/* Theme light */
+// --- Nouvelles couleurs modernes pour site commercial ---
+$electricBlue: #00D4FF; // Accent électrique pour les CTA
+$neonPurple: #8B5CF6; // Accent néon pour les éléments tech
+$cyberGreen: #10B981; // Succès/validation
+$sunsetOrange: #F59E0B; // Avertissement/attention
+$coralRed: #EF4444; // Erreur/alerte
+$deepOcean: #1E293B; // Texte principal plus contrasté
+$slateGray: #64748B; // Texte secondaire moderne
+$frostWhite: #F8FAFC; // Fond ultra-blanc moderne
 
-$bluelight: rgb(74,204,236);
-$StartLightGradient: rgb(116, 108, 247);
-$StartLightGradient-50: rgba(116, 108, 247, 0.5);
-$EndLightGradient: rgb(74,204,234);
-$linkLight: $black;
-$borderLightGardient: linear-gradient(0deg, rgb(74,204,234) 0%, rgb(116, 108, 247) 75%);
-$hoverLight: #8F04FF1A;
-$font-family: 'Montserrat', sans-serif;
-$background-image-light: url('@/assets/images/pictures/dev_web_pc_light.webp');
-$background-image-dark: url('@/assets/images/pictures/dev_web_pc_dark.webp');
+// Dégradé principal (bordure, accent)
+$mainGradient: linear-gradient(135deg, #746CF7 0%, #00D4FF 50%, #4ACCEA 100%);
 
-/* background */    
+// --- Variables utilisées dans le design jour ---
+$StartLightGradient: $mediumSlateBlue;
+$EndLightGradient: $vividSkyBlue;
+$borderLightGardient: $mainGradient;
+$gradientLightPrimary: $mainGradient;
+$gradientLightSecondary: linear-gradient(135deg, #4ACCEA 0%, #8B5CF6 100%);
+$gradientLightAccent: linear-gradient(135deg, #DFF9FF 0%, #00D4FF 100%);
+$gradientTech: linear-gradient(135deg, #746CF7 0%, #00D4FF 25%, #8B5CF6 50%, #10B981 75%, #4ACCEA 100%);
 
-$bgLight1: #E7F9FF;
-$bgLight2: #FAFAFF;
-$bgLight3: #DFF9FF;
+$bgLight1: $azure;
+$bgLight2: $ghostWhite;
+$bgLight3: $lightCyan;
+$bgLight4: $white;
+$bgLightNav: $bgLight2;
+$bgLightCard: $frostWhite; // Nouveau fond pour les cartes
 
-/* Theme dark */
+$textPrimaryLight: $deepOcean; // Plus contrasté pour la lisibilité
+$textSecondaryLight: $vividSkyBlue; // Titre secondaire, lien
+$textLinkHover: $electricBlue; // Lien au survol plus moderne
+$textParagraph: $slateGray; // Texte paragraphe plus moderne
+$textMutedLight: #94A3B8; // Gris bleuté moderne pour texte atténué
 
-$StartDarkGradient: rgb(51,66,255);
-$StartDarkGradient-50: rgba(51,66,255, 0.5);
-$EndDarkGradient: rgb(115 0 255);
-$borderDarkGardient: linear-gradient(0deg, rgb(51,66,255) 0%, rgb(115 0 255) 75%);
-$linkdark: $white;
+$buttonBg: $lightCyan;
+$buttonHover: $electricBlue; // Plus moderne
+$buttonText: $mediumSlateBlue;
+$buttonTextHover: $white;
+$buttonBorder: $mediumSlateBlue;
 
+$linkLight: $electricBlue; // Couleur des liens principaux modernisée
 
-$borderDark: $StartDarkGradient;
-$borderLight: $StartLightGradient;
-$bgLightNav: #f9feff;
+// --- Variables mode nuit (dark) ---
+$bgDark1: #002429; // Fond principal nuit profond
+$bgDark2: #0F172A; // Fond secondaire nuit
+$bgDark3: #1E293B; // Fond accent nuit
+$bgDark4: #020617; // Fond très foncé
+$bgDarkNav: #0F172A;
+$bgDarkCard: #1E293B;
 
+$textPrimaryDark: #F1F5F9; // Texte principal nuit
+$textSecondaryDark: #B3C6FF; // Texte secondaire nuit (plus clair, inspiré du contour)
+$textLinkHoverDark: #4ACCEA; // Lien au survol nuit moderne
+$textParagraphDark: #B3C6FF; // Texte nuit plus moderne
+$textMutedDark: #7C8CF8; // Gris bleuté moderne pour texte atténué
 
-$textPrimaryLight: $StartLightGradient;
+$buttonBgDark: #746CF7;
+$buttonHoverDark: #4ACCEA;
+$buttonTextDark: #F1F5F9;
+$buttonTextHoverDark: #B3C6FF;
+$buttonBorderDark: #746CF7;
 
-$textPrimaryDark: $StartDarkGradient;
-$textSecondaryDark: #E5EDFF;
-$linkdarkhover: $textSecondaryDark;
+$StartDarkGradient: #3540fd;
+$EndDarkGradient: #7102ff;
+$borderDarkGardient: linear-gradient(135deg, #3540fd 0%, #7102ff 100%);
+$gradientDarkPrimary: linear-gradient(135deg, #7102ff 0%, #3540fd 50%, #7102ff 100%);
+$gradientDarkSecondary: linear-gradient(135deg, #7102ff 0%, #3540fd 100%);
+$gradientDarkAccent: linear-gradient(135deg, #334155 0%, #7102ff 100%);
+$StartDarkGradient-50: rgba(53, 64, 253, 0.5);
+$borderDark: #3540fd;
+$shadowGlowDark: 0 0 16px #3540fd, 0 0 32px #7102ff;
 
-$shadow: rgba( 31, 38, 135, 0.37);
+// --- Design system ---
+$border-radius: 12px;
+$border-radius-sm: 8px;
+$border-radius-lg: 16px;
+$border-radius-xl: 24px;
 
-/* background */
+$transition-duration: 0.3s;
+$transition-duration-fast: 0.15s;
+$transition-duration-slow: 0.5s;
 
-$bgDark1 : rgba(0,36,41,1);
-$bgDark2: rgb(26, 39, 39);
-$bgDarkNav : #001214;
+$font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-$border-radius: 10px;
-$transition-duration : 0.3s;
+// Breakpoints
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+$primary: $mediumSlateBlue; // Couleur principale (pour compatibilité avec certains composants)
+
+// Variables manquantes identifiées dans le codebase
+$StartLightGradient-50: rgba(116, 108, 247, 0.5); // Version 50% d'opacité du gradient clair
+$borderLight: $mediumSlateBlue; // Bordure principale mode clair
+$linkdark: $textSecondaryDark; // Couleur des liens mode sombre
+$hoverLight: rgba(116, 108, 247, 0.1); // Couleur de survol mode clair
+
+// --- Nouvelles couleurs sémantiques pour site commercial ---
+$success: $cyberGreen; // Succès/validation
+$warning: $sunsetOrange; // Avertissement/attention
+$error: $coralRed; // Erreur/alerte
+$info: $electricBlue; // Information
+$tech: $neonPurple; // Éléments technologiques
+
+// --- Ombres et effets modernes ---
+$shadowLight: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadowMedium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadowHeavy: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadowGlow: 0 0 20px rgba(116, 108, 247, 0.3); // Effet de lueur pour les éléments tech
 
 

@@ -185,39 +185,116 @@ export default {
 <style lang="scss" scoped>
   .contact-block {
     display: flex;
-    border: rgb(2, 25, 57) solid 3px;
+    border: 2px solid rgba(116, 108, 247, 0.3);
     justify-content: center;
     align-items: center;
-    border-radius: 360px;
+    border-radius: 50%;
     margin: auto;
-    width: 60px;
-    height: 60px;
-    background: lightgray 50% / cover no-repeat;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all $transition-duration ease;
+    
+    &:hover {
+      border-color: $StartLightGradient;
+      background: rgba(116, 108, 247, 0.1);
+    }
   }
 
   /* background bloc Contact */
   #formbg {
-    border-radius: 60px;
-    width: 95%;
-    padding: rem(16);
+    border-radius: $border-radius-xl;
+    width: 100%;
+    padding: $spacing-2xl;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: $spacing-2xl;
+    
+    /* Effet de bordure lumineuse */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: $border-radius-xl;
+      padding: 2px;
+      background: $gradientLightPrimary;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0.3;
+      transition: opacity $transition-duration ease;
+    }
+    
+    &:hover::before {
+      opacity: 0.6;
+    }
+    
+    .main-bloc-light & {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: $shadowMedium;
+      
+      &::before {
+        background: $gradientLightPrimary;
+      }
+    }
+    
+    .main-bloc-dark & {
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: $shadowMedium;
+      
+      &::before {
+        background: $gradientDarkPrimary;
+      }
+    }
+    
+    @media (max-width: $breakpoint-lg) {
+      flex-direction: column;
+      padding: $spacing-xl;
+      gap: $spacing-xl;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-lg;
+      gap: $spacing-lg;
+    }
   }
 
   #contact {
-    width: 50%;
+    width: 60%;
     flex: 1;
+    
     & input:not([type='checkbox']), & textarea, & .input-group-text {
-      padding: rem(10);
-      font-size: rem(16);
+      padding: $spacing-md;
+      font-size: 1rem;
+      border-radius: $border-radius;
+      transition: all $transition-duration ease;
     }
 
     &.dark input:not([type='checkbox']), &.dark textarea, &.dark .input-group-text {
-      border: 1px solid $StartDarkGradient;
-      color: $white;
+      border: 1px solid rgba(116, 108, 247, 0.3);
+      color: $textPrimaryDark;
+      background: rgba(51, 65, 85, 0.8);
+      
+      &:focus {
+        border-color: $StartDarkGradient;
+        box-shadow: 0 0 0 2px rgba(116, 108, 247, 0.2);
+      }
     }
 
     &.light input:not([type='checkbox']), &.light textarea, &.light .input-group-text {
-      border: 1px solid $StartLightGradient;
-      color: $black;
+      border: 1px solid rgba(116, 108, 247, 0.3);
+      color: $textPrimaryLight;
+      background: rgba(255, 255, 255, 0.8);
+      
+      &:focus {
+        border-color: $StartLightGradient;
+        box-shadow: 0 0 0 2px rgba(116, 108, 247, 0.2);
+      }
     }
 
     .form-control {
@@ -225,213 +302,239 @@ export default {
     }
 
     &.dark .form-control::placeholder, .input-group-text {
-      color: $StartDarkGradient;
+      color: rgba($textSecondaryDark, 0.7);
     }
 
     &.light .form-control::placeholder, .input-group-text {
-      color: $StartLightGradient;
+      color: rgba($textSecondaryLight, 0.7);
+    }
+    
+    @media (max-width: $breakpoint-lg) {
+      width: 100%;
     }
   }
 
   #social {
-    width: 45%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    
+    @media (max-width: $breakpoint-lg) {
+      width: 100%;
+    }
+  }
+
+  .social-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    
+    .social-item {
+      padding: $spacing-md;
+      border-radius: $border-radius;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all $transition-duration ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(116, 108, 247, 0.3);
+      }
+      
+      p {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: $textPrimaryLight;
+        
+        .main-bloc-dark & {
+          color: $textPrimaryDark;
+        }
+      }
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    
+    .icon-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md;
+      border-radius: $border-radius;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all $transition-duration ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(116, 108, 247, 0.3);
+        transform: translateY(-2px);
+      }
+      
+      p {
+        font-size: 1rem;
+        color: $textSecondaryLight;
+        
+        .main-bloc-dark & {
+          color: $textSecondaryDark;
+        }
+      }
+    }
   }
 
   .form-group {
     max-width: 100%;
-  }
-
-  .control {
-    font-family: arial;
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 5px;
-    padding-top: 3px;
-    cursor: pointer;
-   
-
-    input {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-    }
-
-    .control_indicator {
-      position: absolute;
-      top: 15px;
-      left: -35px;
-      height: 20px;
-      width: 20px;
-      border-radius: 0px;
-
-      &:after {
-        box-sizing: unset;
-        content: '';
-        position: absolute;
-        display: none;
-      }
-
-      &.light {
-        background: #e6e6e6;
-        border: 0px solid $black;
-
-        &:hover,
-        input:focus & {
-          background: #cccccc;
-        }
-
-        input:checked & {
-          background: rgb(116, 108, 247);
-        }
-
-        &:hover input:not([disabled]):checked &,
-        input:checked:focus & {
-          background: var(--StartLightGradient);
-        }
-
-        input:disabled & {
-          background: #e6e6e6;
-          opacity: 0.6;
-        }
-      }
-
-      &.dark {
-        background: #9BAAFF;
-        border: 0px solid $white;
-
-        &:hover,
-        input:focus & {
-          background: $borderDark;
-        }
-
-        input:checked & {
-          background: rgb(116, 108, 247);
-        }
-
-        &:hover input:not([disabled]):checked &,
-        input:checked:focus & {
-          background: $StartLightGradient;
-        }
-
-        input:disabled & {
-          background: #e6e6e6;
-          opacity: 0.6;
-        }
-      }
-    }
-
-    &:hover input ~ .control_indicator,
-    input:focus ~ .control_indicator {
-      background: #cccccc;
-    }
-
-    input:checked ~ .control_indicator {
-      background: rgb(116, 108, 247);
-    }
-
-    &:hover input:not([disabled]):checked ~ .control_indicator,
-    input:checked:focus ~ .control_indicator {
-      background: $StartLightGradient;
-    }
-
-    input:disabled ~ .control_indicator {
-      background: #e6e6e6;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    input:checked ~ .control_indicator:after {
+    margin-bottom: $spacing-lg;
+    
+    label {
       display: block;
-    }
-
-    .control-checkbox {
-      .control_indicator:after {
-        left: 8px;
-        top: 4px;
-        width: 3px;
-        height: 8px;
-        border: solid $white;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-      }
-
-      input:disabled ~ .control_indicator:after {
-        border-color: #7b7b7b;
-      }
-
-      .control_indicator::before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 4.5rem;
-        height: 4.5rem;
-        margin-left: -1.3rem;
-        margin-top: -1.3rem;
-        background: #2aa1c0;
-        border-radius: 3rem;
-        opacity: 0.6;
-        z-index: 99999;
-        transform: scale(0);
-      }
-
-      input + .control_indicator::before {
-        animation: s-ripple 250ms ease-out;
-      }
-
-      input:checked + .control_indicator::before {
-        animation-name: s-ripple-dup;
+      margin-bottom: $spacing-sm;
+      font-weight: 600;
+      color: $textPrimaryLight;
+      
+      .main-bloc-dark & {
+        color: $textPrimaryDark;
       }
     }
   }
 
-  @keyframes s-ripple {
-    0% {
-      transform: scale(0);
-    }
-    20% {
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1);
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
+    
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
     }
   }
 
-  @keyframes s-ripple-dup {
-    0% {
-      transform: scale(0);
+  .input-group {
+    display: flex;
+    align-items: center;
+    
+    .input-group-text {
+      border-radius: $border-radius 0 0 $border-radius;
+      border-right: none;
+      background: rgba(116, 108, 247, 0.1);
+      color: $textSecondaryLight;
+      
+      .main-bloc-dark & {
+        color: $textSecondaryDark;
+      }
     }
-    30% {
-      transform: scale(1);
-    }
-    60% {
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1);
+    
+    .form-control {
+      border-radius: 0 $border-radius $border-radius 0;
+      border-left: none;
     }
   }
 
-  /* error input message style */
+  .checkbox-group {
+    margin-top: $spacing-lg;
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      cursor: pointer;
+      
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: $StartLightGradient;
+      }
+      
+      span {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        
+        a {
+          color: $StartLightGradient;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: $spacing-md $spacing-lg;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-duration ease;
+    margin-top: $spacing-lg;
+    
+    &.backgroundLight {
+      background: $gradientLightPrimary;
+      color: $white;
+      
+      &:hover:not(.disabled) {
+        transform: translateY(-2px);
+        box-shadow: $shadowMedium;
+      }
+    }
+    
+    &.backgroundDark {
+      background: $gradientDarkPrimary;
+      color: $white;
+      
+      &:hover:not(.disabled) {
+        transform: translateY(-2px);
+        box-shadow: $shadowMedium;
+      }
+    }
+    
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
   .error-message {
-    @include media-breakpoint('up', 'md') {
-      position: absolute;
-      color: $black;
-      font-size: rem(0.875);
-      right: 0;
-      bottom: rem(20);
-      background-color: red;
-      padding: 0.5rem;
-      border-radius: 10px;
-    }
+    color: $error;
+    font-size: 0.875rem;
+    margin-top: $spacing-xs;
   }
 
   .container {
-    @include margin-y(rem(38));
+    padding: $spacing-2xl $spacing-xl;
+    width: 90vw;
+    margin: 0 auto;
+    
+    @media (max-width: $breakpoint-lg) {
+      width: 95vw;
+      padding: $spacing-xl $spacing-lg;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      width: 98vw;
+      padding: $spacing-lg $spacing-md;
+    }
+  }
+
+  .title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: $spacing-xl;
+    color: $textPrimaryLight;
+    
+    .main-bloc-dark & {
+      color: $textPrimaryDark;
+    }
   }
 
   .form-container {
@@ -571,6 +674,126 @@ export default {
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+  }
+
+  .social-item p.h6 {
+    color: $textPrimaryLight;
+    .main-bloc-dark & {
+      color: $textPrimaryDark;
+    }
+  }
+
+  .social-item span {
+    color: $textPrimaryLight;
+    .main-bloc-dark & {
+      color: $textPrimaryDark;
+    }
+  }
+
+  .icon-item .fa-phone + span {
+    color: $textPrimaryLight;
+    .main-bloc-dark & {
+      color: $textPrimaryDark;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid $StartLightGradient;
+    outline-offset: 2px;
+  }
+
+  /* Selection styles */
+  ::selection {
+    background-color: $StartLightGradient;
+    color: $white;
+  }
+
+  ::-moz-selection {
+    background-color: $StartLightGradient;
+    color: $white;
+  }
+
+  /* Styles pour les liens router-link */
+  router-link {
+    color: $textSecondaryLight;
+    text-decoration: none;
+    transition: all $transition-duration ease;
+    border-bottom: 1px solid transparent;
+    
+    &:hover {
+      color: $StartLightGradient;
+      border-bottom-color: $StartLightGradient;
+      text-decoration: none;
+    }
+    
+    .main-bloc-dark & {
+      color: $textSecondaryDark;
+      
+      &:hover {
+        color: $StartDarkGradient;
+        border-bottom-color: $StartDarkGradient;
+      }
+    }
+  }
+
+  /* Styles spécifiques pour le lien de la politique de confidentialité */
+  .checkbox-label router-link {
+    color: $StartLightGradient;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all $transition-duration ease;
+    border-bottom: 1px solid transparent;
+    
+    &:hover {
+      color: $textLinkHover;
+      border-bottom-color: $textLinkHover;
+      text-decoration: none;
+    }
+    
+    .main-bloc-dark & {
+      color: $StartDarkGradient;
+      
+      &:hover {
+        color: $textLinkHoverDark;
+        border-bottom-color: $textLinkHoverDark;
+      }
+    }
+  }
+
+  /* Styles pour les liens SVG */
+  .icon-wrapper a {
+    display: block;
+    transition: all $transition-duration ease;
+    border-radius: 50%;
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      filter: drop-shadow(0 6px 20px rgba(116, 108, 247, 0.3));
+    }
+    
+    .main-bloc-dark & {
+      &:hover {
+        filter: drop-shadow(0 6px 20px rgba(53, 64, 253, 0.4));
+      }
+    }
+  }
+
+  /* Styles pour les icônes sociales */
+  .social-icons .icon-item {
+    transition: all $transition-duration ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    .icon-wrapper {
+      transition: all $transition-duration ease;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 </style>

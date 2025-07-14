@@ -84,13 +84,50 @@ const prevSlide = () => {
 <style lang="scss" scoped>
 @import '@/assets/styles/_variables.scss';
 
+#projet {
+  padding: $spacing-2xl $spacing-xl;
+  width: 90vw;
+  margin: 0 auto;
+  
+  @media (max-width: $breakpoint-lg) {
+    width: 95vw;
+    padding: $spacing-xl $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    width: 98vw;
+    padding: $spacing-lg $spacing-md;
+  }
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: $spacing-xl;
+  color: $textPrimaryLight;
+  
+  .main-bloc-dark & {
+    color: $textPrimaryDark;
+  }
+}
+
 .carousel {
   display: flex;
   width: 100%;
   position: relative;
-  margin-top: 2rem;
-  border: 1px solid rgba(30, 28, 28, 0.21);
-
+  margin-top: $spacing-lg;
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: $shadowMedium;
+  
+  .main-bloc-dark & {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .card-carousel {
@@ -98,17 +135,41 @@ const prevSlide = () => {
   width: 100%;
   overflow: hidden;
   transition: transform 0.5s ease-in-out;
+  padding: $spacing-xl;
+  
+  @media (max-width: $breakpoint-lg) {
+    padding: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+  }
 }
 
 .card {
   flex: 0 0 100%;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   opacity: 0;
   visibility: hidden;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: $shadowLight;
+  
+  .main-bloc-dark & {
+    background: rgba(51, 65, 85, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 
   &.active {
     opacity: 1;
     visibility: visible;
+  }
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadowMedium;
   }
 }
 
@@ -116,32 +177,86 @@ const prevSlide = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: $spacing-lg;
+  
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: $textPrimaryLight;
+    text-align: center;
+    
+    .main-bloc-dark & {
+      color: $textPrimaryDark;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  gap: 1rem;
+  padding: $spacing-xl;
+  gap: $spacing-lg;
 
   & .btn {
     margin: 0 auto;
     width: auto;
     text-align: center;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius;
+    font-weight: 600;
+    transition: all $transition-duration ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadowLight;
+    }
+  }
+  
+  @media (max-width: $breakpoint-lg) {
+    padding: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+    gap: $spacing-md;
   }
 }
 
 .card-img-top {
   max-width: 100%;
-  max-height: 244px;
+  max-height: 300px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
+  border-radius: $border-radius;
+  padding: $spacing-md;
+  
+  @media (max-width: $breakpoint-md) {
+    max-height: 250px;
+  }
+}
+
+.card-text {
+  text-align: center;
+  line-height: 1.6;
+  color: $textSecondaryLight;
+  font-size: 1.125rem;
+  
+  .main-bloc-dark & {
+    color: $textSecondaryDark;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+  }
 }
 
 .cardDark {
-  background-color: $bgDark2;
+  background-color: rgba(51, 65, 85, 0.9);
 }
 
 /* arrow css */
@@ -150,26 +265,52 @@ const prevSlide = () => {
   border: none;
   cursor: pointer;
   padding: 0;
-  margin: auto rem(10);
+  margin: auto $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (max-width: $breakpoint-md) {
+    margin: auto $spacing-sm;
+  }
 }
 
 .prev-button {
-  left: 10px;
+  left: $spacing-md;
 }
 
 .next-button {
-  right: 10px;
+  right: $spacing-md;
 }
 
 .prev-button, .next-button {
   background: none;
   border: none;
   cursor: pointer;
+  padding: $spacing-sm;
+  border-radius: $border-radius;
+  transition: all $transition-duration ease;
+  
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .arrow-light, .arrow-dark {
-  width: 47px;
-  height: 66px;
+  width: 40px;
+  height: 56px;
+  transition: all $transition-duration ease;
+  
+  @media (max-width: $breakpoint-md) {
+    width: 32px;
+    height: 45px;
+  }
 }
 
 .arrow-light {
@@ -194,11 +335,5 @@ const prevSlide = () => {
 .arrow-light:hover path {
   fill: $EndLightGradient;
   stroke: $StartLightGradient;
-}
-
-/* disabled arrow */
-.arrow-disabled-light, .arrow-disabled-dark {
-  opacity: 0.5;
-  cursor: default;
 }
 </style>

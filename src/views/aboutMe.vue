@@ -110,26 +110,93 @@ const accordionStyle = (index) => {
 .container {
   @include flex-center;
   flex-direction: column;
-  padding: rem(32) ;
+  width: 90vw;
+  margin: 0 auto;
+  padding: $spacing-2xl $spacing-xl;
+  
+  @media (max-width: $breakpoint-lg) {
+    width: 95vw;
+    padding: $spacing-xl $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    width: 98vw;
+    padding: $spacing-lg $spacing-md;
+  }
 }
 
 .about-me-content {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: rem(16);
+  gap: $spacing-md;
 }
 
 .h1-dark, .h1-light {
-  padding-bottom: rem(42) ;
+  padding-bottom: $spacing-xl;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: $spacing-lg;
 }
 
 .blocPresentation {
-  @include border-radius($border-radius);
-  @include box-shadow();
-  padding: rem(16) rem(32);
-  transition: transform $transition-duration ease-in-out;
+  @include border-radius($border-radius-lg);
+  padding: $spacing-3xl;
+  transition: all $transition-duration ease-in-out;
   width: 100%;
+  margin: 0 auto;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  
+  /* Effet de bordure lumineuse */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $border-radius-lg;
+    padding: 2px;
+    background: $gradientLightPrimary;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.3;
+    transition: opacity $transition-duration ease;
+  }
+  
+  &:hover::before {
+    opacity: 0.6;
+  }
+  
+  .main-bloc-light & {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: $shadowMedium;
+    
+    &::before {
+      background: $gradientLightPrimary;
+    }
+  }
+  
+  .main-bloc-dark & {
+    background: rgba(30, 41, 59, 0.95);
+    box-shadow: $shadowMedium;
+    
+    &::before {
+      background: $gradientDarkPrimary;
+    }
+  }
+  
+  @media (max-width: $breakpoint-lg) {
+    padding: $spacing-xl;
+    max-width: 100%;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-lg;
+  }
 }
 
 .float-start {
@@ -137,40 +204,71 @@ const accordionStyle = (index) => {
 }
 
 .title {
-  padding-bottom: rem(32);
+  padding-bottom: $spacing-lg;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: $spacing-md;
 }
 
 .photo-profil {
   width: 100%;
-  max-width: rem(150);
-  margin: 0 auto;
+  max-width: 200px;
+  margin: 0 auto $spacing-lg auto;
+  border-radius: $border-radius;
+  box-shadow: $shadowLight;
+  
+  @media (max-width: $breakpoint-md) {
+    max-width: 150px;
+  }
 }
 
 .paragraphe {
   text-align: justify;
-  padding-top: rem(16);
-  padding-bottom: rem(16);
-  line-height: rem(32);
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+  line-height: 1.7;
   width: 100%;
+  font-size: 1.125rem;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 }
 
 .accordion-item {
   cursor: pointer;
-  margin-bottom: rem(16);
+  margin-bottom: $spacing-md;
   width: 100%;
+  border-radius: $border-radius;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all $transition-duration ease;
+  
+  &:hover {
+    border-color: rgba(116, 108, 247, 0.3);
+    box-shadow: $shadowLight;
+  }
 }
 
 .accordion-header {
-  padding: rem(8) rem(16);
+  padding: $spacing-lg;
   position: relative;
   transition: all $transition-duration ease-in-out;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  font-size: 1.125rem;
+  font-weight: 600;
+  
   &:hover {
     background-color: rgba($StartLightGradient, 0.1);
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+    font-size: 1rem;
   }
 }
 
@@ -181,25 +279,36 @@ const accordionStyle = (index) => {
   opacity: 0;
   transform: translateX(-100%);
   width: 100%;
+  padding: 0 $spacing-lg;
+  
+  @media (max-width: $breakpoint-md) {
+    padding: 0 $spacing-md;
+  }
 }
 
 .accordion-item.active {
   .accordion-header {
-    background-color: rgba($StartLightGradient, 0.1);
+    background-color: rgba($StartLightGradient, 0.15);
   }
 
   .accordion-content {
     max-height: 1000px;
     opacity: 1;
     transform: translateX(0);
+    padding: $spacing-lg;
+    
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-md;
+    }
   }
 }
 
 .accordion-icon {
   transition: transform 0.3s ease;
-}
-
-.rotate {
-  transform: rotate(180deg);
+  font-size: 1.25rem;
+  
+  &.rotate {
+    transform: rotate(180deg);
+  }
 }
 </style>

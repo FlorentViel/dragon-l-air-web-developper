@@ -84,9 +84,16 @@ onUnmounted(() => {
 .carousel-container {
   @include flex-center;
   flex-direction: column;
-  width: 100%;
-  max-width: 800px;
+  width: 90vw;
   margin: 0 auto;
+  
+  @media (max-width: $breakpoint-lg) {
+    width: 95vw;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    width: 98vw;
+  }
 }
 
 .carousel-title {

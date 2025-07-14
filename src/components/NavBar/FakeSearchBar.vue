@@ -28,15 +28,11 @@
 import { defineProps, defineEmits } from 'vue';
 import BurgerMenu from '@/components/NavBar/BurgerMenu.vue';
 
-const props = defineProps(['theme', 'currentRouteName', 'isRightMenuOpen']);
-const emit = defineEmits(['toggle-menu', 'toggle-right-menu']);
+const props = defineProps(['theme', 'currentRouteName']);
+const emit = defineEmits(['toggle-menu']);
 
 const toggleMenu = () => {
   emit('toggle-menu');
-};
-
-const toggleRightMenu = () => {
-  emit('toggle-right-menu');
 };
 </script>
 

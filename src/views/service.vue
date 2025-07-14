@@ -60,90 +60,233 @@ defineProps(['theme', 'changeSection']);
 @import '@/assets/styles/_media-queries.scss';
 
 #service {
-  margin-bottom: rem(100);
-  margin-top: rem(10);
+  margin-bottom: $spacing-3xl;
+  margin-top: $spacing-lg;
 }
 
 .service-container {
   @include flex-center;
   @include flex-direction(column);
-  @include padding-x(rem(32));
+  width: 90vw;
+  margin: 0 auto;
+  padding: $spacing-2xl $spacing-xl;
+  
+  @media (max-width: $breakpoint-lg) {
+    width: 95vw;
+    padding: $spacing-xl $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    width: 98vw;
+    padding: $spacing-lg $spacing-md;
+  }
 }
 
 .service-title {
-  @include margin-y(rem(24));
-  @include font-size-responsive(2rem, 3rem);
+  margin: $spacing-xl 0;
+  font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
+  font-weight: 700;
 }
 
 .service-content {
   @include flex-center;
   @include flex-direction(column);
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: rem(32);
+  padding: $spacing-2xl;
+  backdrop-filter: blur(20px);
+  border-radius: $border-radius-xl;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  
+  /* Effet de bordure lumineuse */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $border-radius-xl;
+    padding: 2px;
+    background: $gradientLightPrimary;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.3;
+    transition: opacity $transition-duration ease;
+  }
+  
+  &:hover::before {
+    opacity: 0.6;
+  }
+  
+  .main-bloc-light & {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: $shadowMedium;
+    
+    &::before {
+      background: $gradientLightPrimary;
+    }
+  }
+  
+  .main-bloc-dark & {
+    background: rgba(30, 41, 59, 0.95);
+    box-shadow: $shadowMedium;
+    
+    &::before {
+      background: $gradientDarkPrimary;
+    }
+  }
+  
+  @media (max-width: $breakpoint-lg) {
+    padding: $spacing-xl;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-lg;
+  }
 }
 
 .service-description {
   text-align: center;
-  max-width: 800px;
-  @include margin-y(rem(24));
-  @include font-size-responsive(0.7rem, 1rem);
+  width: 100%;
+  margin: $spacing-lg 0 $spacing-xl 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: $textSecondaryLight;
+  
+  .main-bloc-dark & {
+    color: $textSecondaryDark;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 }
 
 .service-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: rem(32);
-  padding: rem(32);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: $spacing-xl;
+  padding: $spacing-xl 0;
+  width: 100%;
+  
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
 }
 
 .service-card {
-  flex: 1 1 calc(33.333% - rem(32));
-  min-width: 250px;
-  max-width: 350px;
-  @include border-radius($border-radius);
-  @include box-shadow();
-  padding: rem(24);
-  transition: transform $transition-duration ease-in-out;
-
+  @include border-radius($border-radius-lg);
+  padding: $spacing-xl;
+  transition: all $transition-duration ease-in-out;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  
+  /* Effet de bordure lumineuse */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $border-radius-lg;
+    padding: 1px;
+    background: $gradientLightSecondary;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0.2;
+    transition: opacity $transition-duration ease;
+  }
+  
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: $shadowHeavy;
+    
+    &::before {
+      opacity: 0.5;
+    }
+  }
+  
+  .card-style-light & {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: $shadowLight;
+    
+    &::before {
+      background: $gradientLightSecondary;
+    }
+  }
+  
+  .card-style-dark & {
+    background: rgba(51, 65, 85, 0.9);
+    box-shadow: $shadowLight;
+    
+    &::before {
+      background: $gradientDarkSecondary;
+    }
   }
 }
 
 .card-image {
   width: 100%;
-  height: 200px;
-  border: 1px solid rgba(60, 56, 56, 0.348);
-  padding: rem(16);
+  height: 180px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: $spacing-md;
   object-fit: cover;
   @include border-radius($border-radius);
-}
-
-.card-body {
-  padding: rem(16);
-}
-
-.card-title {
-  @include margin-y(rem(16));
-}
-
-.card-text {
-  @include margin-y(rem(8));
-}
-
-@include media-breakpoint('down', 'md') {
-  .service-card {
-    flex: 1 1 calc(50% - rem(24));
+  margin-bottom: $spacing-lg;
+  transition: all $transition-duration ease;
+  
+  &:hover {
+    border-color: rgba(116, 108, 247, 0.4);
+    transform: scale(1.02);
   }
 }
 
-@include media-breakpoint('down', 'sm') {
-  .service-card {
-    flex: 1 1 100%;
+.card-body {
+  padding: 0;
+}
+
+.card-title {
+  margin: $spacing-md 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $textPrimaryLight;
+  
+  .main-bloc-dark & {
+    color: $textPrimaryDark;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.25rem;
+  }
+}
+
+.card-text {
+  margin: $spacing-sm 0;
+  line-height: 1.6;
+  color: $textParagraph;
+  
+  .main-bloc-dark & {
+    color: $textParagraphDark;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 0.95rem;
   }
 }
 </style>

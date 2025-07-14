@@ -16,18 +16,16 @@
       {{ navItem.title }}
       <span :class="theme.isDarkMode ? 'dark-mode' : 'light-mode'" class="close-navItem">x</span>
     </router-link>
-
     </div>
 
-    <button @click="toggleRightMenu" class="toggle-button" :class="theme.isDarkMode ? 'dark' : 'light'">
-      <font-awesome-icon :icon="['fas', 'arrow-left']" :class="theme.isDarkMode ? 'icon-dark' : 'icon-light'" />
-  </button>  
-</div>
+    <ToggleDarkMode :theme="theme" @toggle-theme-request="toggleThemeAndEmit" />
+  </div>
   
 </template>
 
 <script>
 import BurgerMenu from './BurgerMenu.vue';
+import ToggleDarkMode from './ToggleDarkMode.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -37,12 +35,13 @@ library.add(faArrowLeft, faArrowRight);
 export default {
   components: {
     BurgerMenu,
+    ToggleDarkMode,
     FontAwesomeIcon
   },
-  props: ['theme', 'navBar', 'isMenuOpen', 'isRightMenuOpen'],
+  props: ['theme', 'navBar', 'isMenuOpen'],
   methods: {
-    toggleRightMenu() {
-      this.$emit('toggle-right-menu');
+    toggleThemeAndEmit() {
+      this.$emit('toggle-theme-request');
     }
   }
 };
@@ -85,6 +84,57 @@ export default {
 
     &.open {
       max-height: 300px; // Ajustez cette valeur selon la hauteur de votre menu
+    }
+  }
+}
+
+/* Styles pour le bouton de basculement dans la navbar */
+.navBar-links .theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(116, 108, 247, 0.1);
+  border-radius: $border-radius;
+  transition: all $transition-duration ease;
+  margin-left: auto;
+  
+  &:hover {
+    background: rgba(116, 108, 247, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .dark-mode & {
+    background: rgba(53, 64, 253, 0.1);
+    
+    &:hover {
+      background: rgba(53, 64, 253, 0.2);
+    }
+  }
+  
+  .theme-toggle-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    
+    &.text-white {
+      color: $textPrimaryDark;
+    }
+    
+    &.text-dark {
+      color: $textPrimaryLight;
+    }
+  }
+  
+  @media (max-width: 985px) {
+    margin-left: 0;
+    margin-top: $spacing-md;
+    align-self: flex-end;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    .theme-toggle-text {
+      display: none;
     }
   }
 }

@@ -47,46 +47,144 @@
   </script>
   
   <style lang="scss" scoped>
+  @import '@/assets/styles/_variables.scss';
+  @import '@/assets/styles/_functions.scss';
+  @import '@/assets/styles/_media-queries.scss';
   
-
+  #service-detail {
+    padding: $spacing-2xl 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container {
+    width: 90vw;
+    margin: 0 auto;
+    padding: $spacing-2xl $spacing-xl;
+    
+    @media (max-width: $breakpoint-lg) {
+      width: 95vw;
+      padding: $spacing-xl $spacing-lg;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      width: 98vw;
+      padding: $spacing-lg $spacing-md;
+    }
+  }
   
   .service-detail {
-    padding: rem(32);
+    padding: $spacing-3xl;
+    border-radius: $border-radius-xl;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: $shadowMedium;
+    position: relative;
+    overflow: hidden;
+    
+    /* Effet de bordure lumineuse */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: $border-radius-xl;
+      padding: 2px;
+      background: $gradientLightPrimary;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0.3;
+      transition: opacity $transition-duration ease;
+    }
+    
+    &:hover::before {
+      opacity: 0.6;
+    }
+    
+    .dark-mode & {
+      background: rgba(30, 41, 59, 0.95);
+      
+      &::before {
+        background: $gradientDarkPrimary;
+      }
+    }
     
     h1 {
-      margin-bottom: rem(24);
+      margin-bottom: $spacing-xl;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+      font-weight: 700;
+      color: $textPrimaryLight;
+      
+      .dark-mode & {
+        color: $textPrimaryDark;
+      }
+    }
+    
+    @media (max-width: $breakpoint-lg) {
+      padding: $spacing-xl;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-lg;
     }
   }
   
   .back-button {
-    margin: rem(16) 0;
-    padding: rem(8) rem(16);
+    margin: $spacing-lg 0;
+    padding: $spacing-md $spacing-lg;
     border: none;
     border-radius: $border-radius;
     cursor: pointer;
     transition: all $transition-duration ease;
+    background: $gradientLightPrimary;
+    color: $white;
+    font-weight: 600;
     
     &:hover {
-      opacity: 0.8;
+      transform: translateY(-2px);
+      box-shadow: $shadowMedium;
+    }
+    
+    .dark-mode & {
+      background: $gradientDarkPrimary;
     }
   }
   
   .service-content {
     display: flex;
-    gap: rem(32);
-    margin-top: rem(24);
+    gap: $spacing-2xl;
+    margin-top: $spacing-xl;
     
-    @include media-breakpoint(down, md) {
-      @include flex-column;
+    @media (max-width: $breakpoint-lg) {
+      flex-direction: column;
+      gap: $spacing-xl;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      gap: $spacing-lg;
     }
   }
   
   .service-image {
     max-width: 50%;
     height: auto;
-    border-radius: $border-radius;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadowLight;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all $transition-duration ease;
     
-    @include media-breakpoint(down, md) {
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: $shadowMedium;
+    }
+    
+    @media (max-width: $breakpoint-lg) {
       max-width: 100%;
     }
   }
@@ -95,20 +193,48 @@
     flex: 1;
     
     p {
-      margin-bottom: rem(16);
+      margin-bottom: $spacing-lg;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: $textSecondaryLight;
+      
+      .dark-mode & {
+        color: $textSecondaryDark;
+      }
+      
+      @media (max-width: $breakpoint-md) {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
     }
     
     ul {
       list-style-type: none;
-      padding-left: rem(16);
+      padding-left: $spacing-lg;
       
       li {
-        margin-bottom: rem(8);
+        margin-bottom: $spacing-md;
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: $textSecondaryLight;
+        
+        .dark-mode & {
+          color: $textSecondaryDark;
+        }
+        
         &:before {
           content: "•";
-          color: $primary;
+          color: $StartLightGradient;
           font-weight: bold;
-          margin-right: rem(8);
+          margin-right: $spacing-sm;
+        }
+        
+        .dark-mode &:before {
+          color: $StartDarkGradient;
+        }
+        
+        @media (max-width: $breakpoint-md) {
+          font-size: 1rem;
         }
       }
     }

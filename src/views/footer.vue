@@ -31,18 +31,29 @@ export default {
 <style lang="scss" scoped>
 
 #footerBar {
-  width: 100%;
+  width: 100vw;
   height: auto;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   bottom: 0;
   background-size: 100vw;
   position: relative;
-  padding: rem(16);
+  padding: $spacing-lg $spacing-xl;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
   transition: background-color 0.3s ease;
+  margin: 0 auto;
+  
+  @media (max-width: $breakpoint-lg) {
+    padding: $spacing-md $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-sm $spacing-md;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
 
   &.nav-dark {
     background-color: $bgDark1;
@@ -53,7 +64,47 @@ export default {
   }
 }
 
+.footerTextLight {
+  color: $textSecondaryLight;
+  text-decoration: none;
+  transition: color $transition-duration ease;
+  
+  &:hover {
+    color: $textLinkHover;
+  }
+}
 
+.footerTextDark {
+  color: $textSecondaryDark;
+  text-decoration: none;
+  transition: color $transition-duration ease;
+  
+  &:hover {
+    color: $textLinkHoverDark;
+  }
+}
 
+.text-color-light {
+  color: $textPrimaryLight;
+}
+
+.text-color-dark {
+  color: $textPrimaryDark;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.style-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
 
 </style>

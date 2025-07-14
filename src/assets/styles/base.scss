@@ -1,86 +1,277 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
-
   font-family: $font-family;
-  $background-image-light: $background-image-light;
-  $background-image-dark: $background-image-dark;
-
-
+  font-size: 16px;
+  line-height: 1.6;
+  color: $textParagraph;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23746CF7" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
 }
-
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
+  padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
-/* app */
+body {
+  font-family: $font-family;
+  color: $textParagraph;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23746CF7" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  transition: background $transition-duration, color $transition-duration;
+  overflow-x: hidden;
+}
 
-#app{
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family;
+  font-weight: 700;
+  color: $textPrimaryLight;
+  margin-bottom: $spacing-md;
+
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textPrimaryDark;
+  }
+}
+
+h2, h3, h4, h5, h6 {
+  color: $textSecondaryLight;
+  font-weight: 600;
+
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textSecondaryDark;
+  }
+}
+
+h1 {
+  color: $mediumSlateBlue !important;
+  font-weight: 700;
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textPrimaryDark !important;
+  }
+}
+
+h2 {
+  color: $vividSkyBlue !important;
+  font-weight: 600;
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textSecondaryDark !important;
+  }
+}
+
+h3 {
+  color: $vividSkyBlue !important;
+  font-weight: 600;
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textSecondaryDark !important;
+  }
+}
+
+p, label, span, li, a {
+  font-family: $font-family;
+  color: $textParagraph;
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textParagraphDark;
+  }
+}
+
+a {
+  color: $textSecondaryLight;
+  text-decoration: none;
+  transition: all $transition-duration ease;
+  position: relative;
+  
+  &:hover, &:focus {
+    color: $textLinkHover;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textSecondaryDark;
+    
+    &:hover, &:focus {
+      color: $textLinkHoverDark;
+    }
+  }
+}
+
+/* Styles spécifiques pour les liens router-link */
+router-link {
+  color: $textSecondaryLight;
+  text-decoration: none;
+  transition: all $transition-duration ease;
+  border-bottom: 1px solid transparent;
+  
+  &:hover, &:focus {
+    color: $StartLightGradient;
+    border-bottom-color: $StartLightGradient;
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  
+  .backgroundDark &,
+  .main-bloc-dark & {
+    color: $textSecondaryDark;
+    
+    &:hover, &:focus {
+      color: $StartDarkGradient;
+      border-bottom-color: $StartDarkGradient;
+    }
+  }
+}
+
+/* Styles pour les liens externes */
+a[target="_blank"] {
+  &::after {
+    content: '↗';
+    margin-left: 4px;
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: opacity $transition-duration ease;
+  }
+  
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Styles pour les liens de navigation */
+.nav-link, .navBar-item {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(116, 108, 247, 0.15);
+  }
+  
+  .dark-mode & {
+    &:hover {
+      box-shadow: 0 4px 12px rgba(53, 64, 253, 0.2);
+    }
+  }
+}
+
+/* Styles pour les liens sociaux */
+.social-link {
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(116, 108, 247, 0.25);
+  }
+  
+  .dark-mode & {
+    &:hover {
+      box-shadow: 0 6px 20px rgba(53, 64, 253, 0.3);
+    }
+  }
+}
+
+/* App */
+#app {
   box-sizing: border-box;
   overflow-x: hidden;
   perspective: 1000px;
   @include flex-column;
-
+  min-height: 100vh;
 }
 
-
-
-
+/* Background themes */
 .backgroundLight {
-
-  background: $white;
-  transition: .5s ease;
-
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23746CF7" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  color: $textParagraph;
+  transition: background-color $transition-duration ease, color $transition-duration ease;
 }
 
+.backgroundDark {
+  background: 
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%2300D4FF" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  color: $white;
+  transition: background-color $transition-duration ease, color $transition-duration ease;
+}
 
-  .backgroundDark {
-    background: $bgDark1;
-    transition: .5s ease;
-} 
-
-
-/*section*/
-
+/* Section */
 .section {
   margin-top: auto;
   margin-bottom: auto;
   position: relative;
+  padding: $spacing-2xl 0;
 }
 
 .img-fluid {
   width: 100%;
   height: auto;
+  display: block;
 }
 
+/* Container */
 .container {
   @include flex-center;
   flex-direction: column;
-  padding-right: rem(16);
-  padding-left: rem(16);
-  
+  padding: 0 $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .container-fluid {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 0 $spacing-lg;
+  margin: 0 auto;
 }
 
+/* Utility classes */
 .float-start {
   float: left;
 }
 
 .d-flex {
-  display :flex;
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid $StartLightGradient;
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: $StartLightGradient;
+  color: $white;
+}
+
+::-moz-selection {
+  background-color: $StartLightGradient;
+  color: $white;
 }
