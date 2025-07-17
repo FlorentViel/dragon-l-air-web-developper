@@ -5,7 +5,7 @@
       <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'" class="service-title">Mes services</h1>
 
 
-      <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="service-description">
+      <p :class="theme.isDarkMode ? 'text-primary-dark' : 'text-primary-light'" class="service-description">
         En tant que développeur web passionné, je propose une gamme complète de services pour répondre à vos besoins numériques. De la conception de sites vitrines élégants à la création de boutiques en ligne performantes, je m'engage à fournir des solutions sur mesure qui reflètent votre vision et atteignent vos objectifs commerciaux.
       </p>
       <div class="service-cards">
@@ -116,6 +116,8 @@ defineProps(['theme', 'changeSection']);
     mask-composite: exclude;
     opacity: 0.3;
     transition: opacity $transition-duration ease;
+    pointer-events: none !important;
+    z-index: -1;
   }
   
   &:hover::before {
@@ -155,10 +157,10 @@ defineProps(['theme', 'changeSection']);
   margin: $spacing-lg 0 $spacing-xl 0;
   font-size: 1.125rem;
   line-height: 1.7;
-  color: $textSecondaryLight;
+  color: $textPrimaryLight;
   
   .main-bloc-dark & {
-    color: $textSecondaryDark;
+    color: $textPrimaryDark;
   }
   
   @media (max-width: $breakpoint-md) {
@@ -195,6 +197,9 @@ defineProps(['theme', 'changeSection']);
   overflow: hidden;
   text-decoration: none;
   display: block;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 10;
   
   /* Effet de bordure lumineuse */
   &::before {
@@ -211,6 +216,8 @@ defineProps(['theme', 'changeSection']);
     mask-composite: exclude;
     opacity: 0.2;
     transition: opacity $transition-duration ease;
+    pointer-events: none !important;
+    z-index: -1;
   }
   
   &:hover {
@@ -243,10 +250,11 @@ defineProps(['theme', 'changeSection']);
 
 .card-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: $spacing-md;
-  object-fit: cover;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.05);
   @include border-radius($border-radius);
   margin-bottom: $spacing-lg;
   transition: all $transition-duration ease;
@@ -254,6 +262,15 @@ defineProps(['theme', 'changeSection']);
   &:hover {
     border-color: rgba(116, 108, 247, 0.4);
     transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: $breakpoint-lg) {
+    height: 180px;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    height: 160px;
   }
 }
 

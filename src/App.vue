@@ -43,7 +43,7 @@ const tabs = [
   { title: 'Accueil', route: 'home' },
   { title: 'A propos de moi', route: 'aboutMe' },
   { title: 'Mes services', route: 'service' },
-  { title: 'Mes projets', route: 'projet' },
+          { title: 'Mes réalisations', route: 'projet' },
   { title: 'Contact', route: 'contact' },
   // Ajoutez autant d'onglets que vous le souhaitez
 ];
@@ -57,6 +57,11 @@ function changeSection(newSectionName) {
 
 function toggleTheme() {
   theme.toggleTheme();
+  // Mettre à jour le favicon quand le thème change
+  const favicon = document.getElementById('favicon');
+  if (favicon) {
+    favicon.href = theme.isDarkMode ? '/favicon-light.png' : '/favicon-dark.png';
+  }
 }
 
 const route = useRoute();
@@ -76,6 +81,12 @@ onMounted(() => {
   // Retirer l'image de fond par défaut
   document.body.style.backgroundImage = 'none';
   document.body.style.backgroundColor = theme.isDarkMode ? '#1A202C' : '#F7FAFC';
+  
+  // Initialiser le favicon selon le thème actuel
+  const favicon = document.getElementById('favicon');
+  if (favicon) {
+    favicon.href = theme.isDarkMode ? '/favicon-dark.png' : '/favicon-light.png';
+  }
 });
 </script>
 

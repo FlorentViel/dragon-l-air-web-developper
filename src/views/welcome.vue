@@ -1,14 +1,12 @@
 <template>
   <section id="welcome" class="section container">
     <div class="welcome-content">
-      <div
-        id="content"
-        class="content-body"
-        :class="theme.isDarkMode ? 'main-bloc-dark' : 'main-bloc-light'"
-        @mousemove="handlecontentEffect"
-        @mouseleave="resetcontentEffect"
-        ref="content"
-      >
+              <div
+          id="content"
+          class="content-body"
+          :class="theme.isDarkMode ? 'main-bloc-dark' : 'main-bloc-light'"
+          ref="content"
+        >
         <div class="content-header">
           <h1
             :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'"
@@ -59,7 +57,7 @@
 
         <div class="quote-container animate-text" :style="{ '--delay': '0.9s' }">
           <blockquote class="quote">
-            "Le code est la poésie de la logique, et chaque ligne raconte une histoire."
+            "La technologie est au service de la créativité, et chaque projet est une nouvelle aventure."
           </blockquote>
         </div>
         
@@ -92,10 +90,10 @@
               <i class="fab fa-linkedin"></i>
               <span>LinkedIn</span>
             </a>
-            <a href="mailto:florent.vieville03@gmail.com" class="social-link">
-              <i class="fas fa-envelope"></i>
-              <span>Email</span>
-            </a>
+            <button @click="copyEmail" class="social-link email-copy-btn" :class="{ 'copied': emailCopied }">
+              <i :class="emailCopied ? 'fas fa-check' : 'fas fa-envelope'"></i>
+              <span>{{ emailCopied ? 'Copié !' : 'Email' }}</span>
+            </button>
           </div>
         </div>
       </div>
@@ -111,6 +109,7 @@ import Button from '@/components/Button.vue';
 
 const props = defineProps(['theme', 'selectedSection']);
 const content = ref(null);
+const emailCopied = ref(false);
 
 // Configuration SEO avec useHead
 useHead({
@@ -143,33 +142,35 @@ useHead({
   ]
 });
 
-const handlecontentEffect = (event) => {
-  if (!content.value) return;
-  
-  const rect = content.value.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-  
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
-  
-  const rotateX = (y - centerY) / 60;
-  const rotateY = (centerX - x) / 60;
-  
-  content.value.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
-};
 
-const resetcontentEffect = () => {
-  if (content.value) {
-    content.value.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+
+const copyEmail = async () => {
+  try {
+    await navigator.clipboard.writeText('florent.vieville03@gmail.com');
+    emailCopied.value = true;
+    
+    // Reset après 2 secondes
+    setTimeout(() => {
+      emailCopied.value = false;
+    }, 2000);
+  } catch (err) {
+    // Fallback pour les navigateurs plus anciens
+    const textArea = document.createElement('textarea');
+    textArea.value = 'florent.vieville03@gmail.com';
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    
+    emailCopied.value = true;
+    setTimeout(() => {
+      emailCopied.value = false;
+    }, 2000);
   }
 };
 
 onMounted(() => {
-  if (content.value) {
-    content.value.addEventListener("mousemove", handlecontentEffect);
-    content.value.addEventListener("mouseleave", resetcontentEffect);
-  }
+  // Initialisation si nécessaire
 });
 </script>
 
@@ -360,6 +361,8 @@ onMounted(() => {
     mask-composite: exclude;
     opacity: 0.5;
     transition: opacity $transition-duration ease;
+    pointer-events: none !important;
+    z-index: -1;
   }
   
   &:hover {
@@ -588,6 +591,47 @@ onMounted(() => {
 
 .social-link i {
   font-size: 1.25rem;
+}
+
+/* Email copy button styles */
+.email-copy-btn {
+  cursor: pointer;
+  border: none;
+  background: rgba(116, 108, 247, 0.05);
+  border: 1px solid rgba(116, 108, 247, 0.1);
+  transition: all $transition-duration ease;
+  
+  &:hover {
+    color: $StartLightGradient;
+    background: rgba(116, 108, 247, 0.1);
+    transform: translateY(-2px);
+    box-shadow: $shadowLight;
+  }
+  
+  &.copied {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+  
+  .dark-mode & {
+    color: $textSecondaryDark;
+    background: rgba(53, 64, 253, 0.05);
+    border-color: rgba(53, 64, 253, 0.2);
+    
+    &:hover {
+      color: $StartDarkGradient;
+      background: rgba(53, 64, 253, 0.1);
+    }
+    
+    &.copied {
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+      border-color: rgba(52, 211, 153, 0.2);
+    }
+  }
 }
 
 /* Responsive adjustments */

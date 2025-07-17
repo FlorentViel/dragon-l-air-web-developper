@@ -1,6 +1,6 @@
 <template>
   <section id="projet" key="projet" class="container mt-5">
-    <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'" class="text-center title h1">Projet</h1>
+    <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'" class="text-center title h1">Mes réalisations</h1>
     <div class="carousel">
       <div class="arrow-btn">
         <button class="btn prev-button" :disabled="isPrevDisabled" @click="prevSlide">

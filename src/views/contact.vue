@@ -228,6 +228,8 @@ export default {
       mask-composite: exclude;
       opacity: 0.3;
       transition: opacity $transition-duration ease;
+      pointer-events: none !important;
+      z-index: -1;
     }
     
     &:hover::before {
@@ -299,6 +301,10 @@ export default {
 
     .form-control {
       width: 100%;
+      pointer-events: auto !important;
+      cursor: text !important;
+      z-index: 10;
+      position: relative;
     }
 
     &.dark .form-control::placeholder, .input-group-text {

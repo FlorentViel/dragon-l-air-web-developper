@@ -1,7 +1,7 @@
 <template>
   <section id="about" class="container">
     <div>
-      <div id="card" @mousemove="handleCardEffect" @mouseleave="resetCardEffect">
+      <div id="card">
         <div>
           <h1 :class="theme.isDarkMode ? 'h1-dark' : 'h1-light'">&Agrave; propos de moi</h1>
         </div>
@@ -27,10 +27,11 @@
                 </h3>
                 <div class="accordion-content" :style="accordionStyle(0)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
-                    Je suis un développeur web freelance qui commence son activité. 
-                    J'ai développé les outils nécessaires pour évoluer à mon compte et de continuer à développer mes compétences. 
-                    Je suis d'un naturel calme, à l'écoute et curieux et je m'oriente vers le développement de site pour les entreprises, 
-                    entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
+                      Passionné par le développement web depuis plusieurs années, je suis Florent Vieville, un développeur freelance basé en France. Mon parcours m'a amené à découvrir ma passion pour la création d'expériences web exceptionnelles.
+
+                    D'un naturel curieux et toujours en quête d'apprentissage, je combine créativité et rigueur technique pour donner vie à vos projets digitaux. Mon approche se caractérise par une écoute attentive de vos besoins et une communication transparente tout au long du processus de développement.
+
+                    Je crois fermement que chaque projet web raconte une histoire unique, et je m'engage à créer des solutions sur mesure qui reflètent parfaitement votre vision et vos objectifs.
                   </p>
                 </div>
               </article>
@@ -49,11 +50,21 @@
                 </h3>
                 <div class="accordion-content" :style="accordionStyle(1)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
-                    J'ai développé des sites web pour des entreprises, entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
-                    Je suis d'un naturel calme, à l'écoute et curieux et je m'oriente vers le développement de site pour les entreprises,
-                    entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
-                    Je suis d'un naturel calme, à l'écoute et curieux et je m'oriente vers le développement de site pour les entreprises,
-                    entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
+                    Mon parcours dans le développement web a débuté par une formation solide, suivie d'expériences pratiques dans divers projets. Actuellement en création d'entreprise en tant que développeur web freelance.
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Formation :</strong><br>
+                    • Formation SEO : LIVEMENTOR Paris (septembre 2024)<br>
+                    • Management et entreprenariat : EME-BGE Beauvais (juin 2024)<br>
+                    • Titre pro développeur web et web mobile : AFCI Saint-Quentin (2021-2022)<br>
+                    • Certificat développeur et intégrateur web : WEBFORCE 3 Lille (2018)
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Expériences professionnelles :</strong><br>
+                    • Développeur web et web mobile : SOS-CONSOLES (2022) - Conception de sites web<br>
+                    • Développeur web : Rose & Piment Saint-Quentin (2021) - Refonte graphique de site web<br>
+                    • Agent logistique : Gedimat Saint-Quentin (2020) - Stockage et chargement<br>
+                    • Apprenti Agent logistique : GKN Ribemont (2013-2015) - Réception, préparation de commandes, expédition
                   </p>
                 </div>
               </article>
@@ -72,8 +83,87 @@
                 </h3>
                 <div class="accordion-content" :style="accordionStyle(2)">
                   <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
-                    Je suis d'un naturel calme, à l'écoute et curieux et je m'oriente vers le développement de site pour les entreprises,
-                    entrepreneurs ou indépendants qui aurait besoins de mettre en avant ses activités, produits et/ou services. 
+                    Je maîtrise un ensemble de technologies et de compétences pour créer des solutions web complètes et performantes :
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Langages de programmation :</strong><br>
+                    • HTML 5, CSS 3, JavaScript<br>
+                    • PHP, SQL<br>
+                    • Vue 3.js, Symfony<br>
+                    • Node.js, Bootstrap, Sass
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Outils et logiciels :</strong><br>
+                    • Cursor (éditeur de code)<br>
+                    • Looping, Figma<br>
+                    • GitHub, Pack Office<br>
+                    • Méthodes de développement web
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Compétences générales :</strong><br>
+                    • À l'écoute des besoins clients<br>
+                    • Élaboration du cahier des charges<br>
+                    • Création de maquettes<br>
+                    • Conception de sites web<br>
+                    • Modélisation de bases de données<br>
+                    • Implémentation de fonctionnalités<br>
+                    • Analyse et correction de bugs
+                  </p>
+                </div>
+              </article>
+
+              <article class="accordion-item" @click="toggleAccordion(3)" :class="{ active: activeIndex === 3 }">
+                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">
+                  Ma philosophie de travail
+                  <font-awesome-icon 
+                    :icon="['fas', 'arrow-down']" 
+                    :class="[
+                      theme.isDarkMode ? 'icon-dark' : 'icon-light',
+                      { 'rotate': activeIndex === 3 }
+                    ]" 
+                    class="accordion-icon"
+                  />
+                </h3>
+                <div class="accordion-content" :style="accordionStyle(3)">
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    Je privilégie une approche collaborative basée sur la transparence et la communication. Chaque projet commence par une phase de découverte approfondie pour comprendre vos objectifs, votre audience et vos contraintes.
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    <strong>Mes valeurs :</strong><br>
+                    • Qualité et excellence technique<br>
+                    • Communication transparente<br>
+                    • Respect des délais<br>
+                    • Support post-livraison<br>
+                    • Évolutivité des solutions
+                  </p>
+                </div>
+              </article>
+
+              <article class="accordion-item" @click="toggleAccordion(4)" :class="{ active: activeIndex === 4 }">
+                <h3 :class="theme.isDarkMode ? 'h3-dark' : 'h3-light'" class="accordion-header">
+                  Pourquoi me choisir ?
+                  <font-awesome-icon 
+                    :icon="['fas', 'arrow-down']" 
+                    :class="[
+                      theme.isDarkMode ? 'icon-dark' : 'icon-light',
+                      { 'rotate': activeIndex === 4 }
+                    ]" 
+                    class="accordion-icon"
+                  />
+                </h3>
+                <div class="accordion-content" :style="accordionStyle(4)">
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    En tant que développeur freelance débutant, je vous offre :
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    • Une relation directe et personnalisée<br>
+                    • Une flexibilité totale dans la gestion de votre projet<br>
+                    • Des tarifs compétitifs sans intermédiaires<br>
+                    • Un suivi personnalisé et une maintenance continue<br>
+                    • Une expertise technique pointue et à jour
+                  </p>
+                  <p :class="theme.isDarkMode ? 'text-color-dark' : 'text-color-light'" class="paragraphe">
+                    Mon statut de débutant me permet d'être particulièrement attentif à vos besoins et de consacrer tout le temps nécessaire à la réussite de votre projet.
                   </p>
                 </div>
               </article>
@@ -165,6 +255,8 @@ const accordionStyle = (index) => {
     mask-composite: exclude;
     opacity: 0.3;
     transition: opacity $transition-duration ease;
+    pointer-events: none !important;
+    z-index: -1;
   }
   
   &:hover::before {
@@ -244,6 +336,9 @@ const accordionStyle = (index) => {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all $transition-duration ease;
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
   
   &:hover {
     border-color: rgba(116, 108, 247, 0.3);

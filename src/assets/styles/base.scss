@@ -191,6 +191,43 @@ a[target="_blank"] {
   min-height: 100vh;
 }
 
+/* Correction des problèmes d'interaction */
+input, textarea, select, button {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid $StartLightGradient;
+  outline-offset: 2px;
+}
+
+.form-control {
+  pointer-events: auto !important;
+  cursor: text;
+}
+
+.service-card, .nav-link, a {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+/* Assurer que les éléments sont cliquables */
+* {
+  pointer-events: auto;
+}
+
+/* Correction spécifique pour les cartes de service */
+.service-card {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadowMedium;
+  }
+}
+
 /* Background themes */
 .backgroundLight {
   background: 
